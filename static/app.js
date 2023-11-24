@@ -74,7 +74,7 @@ class Chatbox {
 
         if(this.conversationState === "normal") {
             let detectedTopic = this.detectTopic(msg2)
-            if(detectedTopic) {
+            if(detectedTopic === "pengembalian") {
                 this.conversationState = detectedTopic;
                 msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Pengembalian buku."}
                 this.messages.push(msg2);
@@ -82,8 +82,15 @@ class Chatbox {
                 textField.value = "";
                 return;
 
-            }else {
-                msg2 = {name: "Bot", message: "oops kami tidak tau maksud anda."}
+            }else if (detectedTopic === "peminjaman") {
+                this.conversationState = detectedTopic;
+                msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Peminjaman buku."}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            } else {
+                msg2 = {name: "Bot", message: "Maaf kami tidak tau maksud anda"}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
@@ -95,19 +102,27 @@ class Chatbox {
         // const rSub = await response.json();
         // let msgSub = { name: "Bot", message: rSub.answer };
         // console.log("msg sub: ", msgSub)
-        if(this.conversationState !== "normal") {
+        if(this.conversationState !== "normal" && this.conversationState === "pengembalian") {
             // let detectedSubTopic =
             this.subtopicState = this.detectSubTopic(msg2);
-            if(this.subtopicState) {
-                const ansPengembalian = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/langkah/success")
-                const response = await ansPengembalian.json();
+            if(this.subtopicState === "langkah") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/langkah")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            } else if(this.subtopicState === "kondisi") {
+                const ansKondisi = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/kondisi")
+                const response = await ansKondisi.json();
                 msg2 = {name: "Bot", message: response.answer}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
             } else {
-                const ansPengembalian = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/langkah/fail")
+                const ansPengembalian = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/fail")
                 const response = await ansPengembalian.json();
                 msg2 = {name: "Bot", message: response.answer}
                 this.messages.push(msg2);
@@ -128,22 +143,36 @@ class Chatbox {
 
   detectTopic(text) {
       const pengembalianBuku = ["kembali", "buku"]
+      const peminjamanBuku = ["pinjam", "buku"]
 
       let pengembalianBukuValid = pengembalianBuku.every(element => text.message.includes(element));
+      let peminjamanBukuValid = peminjamanBuku.every(element => text.message.includes(element));
 
       if(pengembalianBukuValid) {
           return "pengembalian"
+      } else if (peminjamanBukuValid) {
+          return "peminjaman"
       }
   }
 
   detectSubTopic(msg) {
-      const langkah = ["langkah"]
+      const langkahPengembalian = ["langkah"]
+      const kondisiPengembalian = ["rusak", "kondisi"]
 
-      let langkahPengembalianBuku = langkah.every(element => msg.message.includes(element));
+      let langkahPengembalianBuku = langkahPengembalian.every(element => msg.message.includes(element));
+      // let kondisiPengembalianBuku = kondisiPengembalian.every(element => msg.message.includes(element));
 
       if(langkahPengembalianBuku) {
-          return "langkah pengembalian buku"
+          return "langkah"
+      } else if(msg.message.includes("kondisi") || msg.message.includes("rusak") || msg.message.includes("hilang")) {
+          return "kondisi"
       }
+  }
+
+  handleResponse(response ) {
+    if(this.conversationState === "peminjaman") {
+
+    }
   }
 
   updateChatText(chatbox) {
