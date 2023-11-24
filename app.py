@@ -20,15 +20,31 @@ def topics():
     return jsonify(message);
 
 
-@app.get("/fc/topics/pengembalian/langkah/success")
-def pengembalian():
+@app.get("/fc/topics/pengembalian/langkah")
+def langkah_pengembalian():
     # answer = textProcessing(text)
     resp = "Setelah habis masa pinjamnya, maka buku teks yang dipinjam harus dikembalikan. Proses pengembalian pinjaman dilakukan oleh petugas atau pustakawan pada layanan sirkulasi. Dan pastikan keadaan buku saat dikembalikan masih tetap utuh seperti saat peminjaman"
     message = {"answer": resp};
     return jsonify(message);
 
 
-@app.get("/fc/topics/pengembalian/langkah/fail")
+@app.get("/fc/topics/pengembalian/kondisi")
+def kondisi_pengembalian():
+    # answer = textProcessing(text)
+    resp = '''
+    Demikian pula buku yang rusak atau hilang selama masa pinjaman menjadi tanggung jawab peminjam sepenuhnya. Buku yang rusak harus semaksimal mungkin diperbaiki sehingga kembali baik seperti semula, sedangkan buku yang hilang dikenakan sanksi sebagai berikut:
+
+    a. Mengganti dengan buku yang sama (baik judul, pengarang, maupun penerbitnya sedangkan edisi dan tahun terbit boleh berbeda tetapi yang lebih baru)
+    b. Apabila buku yang sama tidak ditemukan, maka yang bersangkutan harus mengkopi buku eksemplar lain milik perpustakaan jika buku tersebut ada lebih dari satucopy
+    
+    Apabila ketentuan a dan b
+    tidak dapat dipenuhi maka yang bersangkutan harus mencari buku dengan subyek yang sama atau hampir sama meskipun judul, pengarang dan penerbit berbeda. Selain itu buku ketiga ini harus mempunyai ciri fisik yang mendekati buku yang diganti, misalnya jumlah halaman tebal buku, ukuran besarnya, dll.
+'''
+    message = {"answer": resp};
+    return jsonify(message);
+
+
+@app.get("/fc/topics/pengembalian/fail")
 def fail_pengembalian():
     # answer = textProcessing(text)
     resp = "Mohon maaf anda sekarang berada pada topik Pengembalian buku, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk pengembalian buku."
