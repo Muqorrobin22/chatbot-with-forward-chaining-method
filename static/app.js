@@ -156,13 +156,13 @@ class Chatbox {
   }
 
   detectSubTopic(msg) {
-      const langkahPengembalian = ["langkah"]
-      const kondisiPengembalian = ["rusak", "kondisi"]
+      // const langkahPengembalian = ["langkah", "cara", "tutorial", "tutor"]
+      // const kondisiPengembalian = ["rusak", "kondisi", "hilang"]
 
-      let langkahPengembalianBuku = langkahPengembalian.every(element => msg.message.includes(element));
+      // let langkahPengembalianBuku = langkahPengembalian.every(element => msg.message.includes(element));
       // let kondisiPengembalianBuku = kondisiPengembalian.every(element => msg.message.includes(element));
 
-      if(langkahPengembalianBuku) {
+      if(msg.message.includes("langkah") || msg.message.includes("cara") || msg.message.includes("tutorial") || msg.message.includes("tutor")) {
           return "langkah"
       } else if(msg.message.includes("kondisi") || msg.message.includes("rusak") || msg.message.includes("hilang")) {
           return "kondisi"
