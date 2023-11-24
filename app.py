@@ -1,8 +1,10 @@
 from flask import Flask, render_template, request, jsonify
 from text_processing import textProcessing
+from flask_cors import CORS
 
 
 app = Flask(__name__)
+CORS(app)
 
 @app.get("/")
 def index_get():
