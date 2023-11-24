@@ -20,10 +20,18 @@ def topics():
     return jsonify(message);
 
 
-@app.get("/fc/topics/pengembalian")
+@app.get("/fc/topics/pengembalian/langkah/success")
 def pengembalian():
     # answer = textProcessing(text)
     resp = "Setelah habis masa pinjamnya, maka buku teks yang dipinjam harus dikembalikan. Proses pengembalian pinjaman dilakukan oleh petugas atau pustakawan pada layanan sirkulasi. Dan pastikan keadaan buku saat dikembalikan masih tetap utuh seperti saat peminjaman"
+    message = {"answer": resp};
+    return jsonify(message);
+
+
+@app.get("/fc/topics/pengembalian/langkah/fail")
+def fail_pengembalian():
+    # answer = textProcessing(text)
+    resp = "Mohon maaf anda sekarang berada pada topik Pengembalian buku, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk pengembalian buku."
     message = {"answer": resp};
     return jsonify(message);
 
