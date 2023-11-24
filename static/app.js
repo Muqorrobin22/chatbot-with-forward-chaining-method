@@ -60,8 +60,26 @@ class Chatbox {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
+        // let breakTopics  = false;
+        //
+        // while (!breakTopics) {
+        //
+        // }
+
         const r = await response.json();
-        let msg2 = { name: "Sam", message: r.answer };
+        let msg2 = { name: "Bot", message: r.answer };
+        console.log(msg2)
+
+        let pengembalianBuku = ["kembali", "buku"]
+
+        let pengembalianBukuValid = pengembalianBuku.every(element => msg2.message.includes(element));
+
+        if(pengembalianBukuValid) {
+            msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Pengembalian buku."}
+        } else {
+            msg2 = {name: "Bot", message: "oops kami tidak tau maksud anda."}
+        }
+
         this.messages.push(msg2);
         this.updateChatText(chatbox);
         textField.value = "";
@@ -78,7 +96,7 @@ class Chatbox {
       .slice()
       .reverse()
       .forEach(function (item, index) {
-        if (item.name === "Sam") {
+        if (item.name === "Bot") {
           html +=
             '<div class="messages__item messages__item--visitor">' +
             item.message +
