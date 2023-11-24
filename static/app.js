@@ -99,13 +99,17 @@ class Chatbox {
             // let detectedSubTopic =
             this.subtopicState = this.detectSubTopic(msg2);
             if(this.subtopicState) {
-                msg2 = {name: "Bot", message: "Langkah Pengembalian buku itu gini loh"}
+                const ansPengembalian = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/langkah/success")
+                const response = await ansPengembalian.json();
+                msg2 = {name: "Bot", message: response.answer}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
             } else {
-                msg2 = {name: "Bot", message: "gatauu kamu ngomong apaan"}
+                const ansPengembalian = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/langkah/fail")
+                const response = await ansPengembalian.json();
+                msg2 = {name: "Bot", message: response.answer}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
