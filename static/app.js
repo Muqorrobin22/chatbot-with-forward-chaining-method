@@ -8,6 +8,8 @@ class Chatbox {
 
     this.state = false;
     this.messages = [];
+    this.conversationState = "normal";
+    this.subtopicState = null;
   }
 
   display() {
@@ -47,7 +49,7 @@ class Chatbox {
     this.messages.push(msg1);
 
     try {
-        const response = await fetch("http://127.0.0.1:5000/predict", {
+        const response = await fetch("http://127.0.0.1:5000/fc/topics", {
             method: "POST",
             body: JSON.stringify({ message: text1 }),
             mode: "cors",
@@ -70,24 +72,74 @@ class Chatbox {
         let msg2 = { name: "Bot", message: r.answer };
         console.log(msg2)
 
-        let pengembalianBuku = ["kembali", "buku"]
+        if(this.conversationState === "normal") {
+            let detectedTopic = this.detectTopic(msg2)
+            if(detectedTopic) {
+                this.conversationState = detectedTopic;
+                msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Pengembalian buku."}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
 
-        let pengembalianBukuValid = pengembalianBuku.every(element => msg2.message.includes(element));
-
-        if(pengembalianBukuValid) {
-            msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Pengembalian buku."}
-        } else {
-            msg2 = {name: "Bot", message: "oops kami tidak tau maksud anda."}
+            }else {
+                msg2 = {name: "Bot", message: "oops kami tidak tau maksud anda."}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
         }
 
-        this.messages.push(msg2);
-        this.updateChatText(chatbox);
-        textField.value = "";
+
+        // const rSub = await response.json();
+        // let msgSub = { name: "Bot", message: rSub.answer };
+        // console.log("msg sub: ", msgSub)
+        if(this.conversationState !== "normal") {
+            // let detectedSubTopic =
+            this.subtopicState = this.detectSubTopic(msg2);
+            if(this.subtopicState) {
+                msg2 = {name: "Bot", message: "Langkah Pengembalian buku itu gini loh"}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            } else {
+                msg2 = {name: "Bot", message: "gatauu kamu ngomong apaan"}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
+        }
+
+
+
     } catch (error) {
         console.error("Error:", error);
         this.updateChatText(chatbox);
         textField.value = "";
     }
+  }
+
+  detectTopic(text) {
+      const pengembalianBuku = ["kembali", "buku"]
+
+      let pengembalianBukuValid = pengembalianBuku.every(element => text.message.includes(element));
+
+      if(pengembalianBukuValid) {
+          return "pengembalian"
+      }
+  }
+
+  detectSubTopic(msg) {
+      const langkah = ["langkah"]
+
+      let langkahPengembalianBuku = langkah.every(element => msg.message.includes(element));
+
+      if(langkahPengembalianBuku) {
+          return "langkah pengembalian buku"
+      }
   }
 
   updateChatText(chatbox) {
