@@ -36,7 +36,7 @@ class Chatbox {
     }
   }
 
-  onSendButton(chatbox) {
+  async onSendButton(chatbox) {
     var textField = chatbox.querySelector("input");
     let text1 = textField.value;
     if (text1 === "") {
@@ -46,26 +46,30 @@ class Chatbox {
     let msg1 = { name: "User", message: text1 };
     this.messages.push(msg1);
 
-    fetch("http://127.0.0.1:5000/predict", {
-      method: "POST",
-      body: JSON.stringify({ message: text1 }),
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((r) => r.json())
-      .then((r) => {
+    try {
+        const response = await fetch("http://127.0.0.1:5000/predict", {
+            method: "POST",
+            body: JSON.stringify({ message: text1 }),
+            mode: "cors",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const r = await response.json();
         let msg2 = { name: "Sam", message: r.answer };
         this.messages.push(msg2);
         this.updateChatText(chatbox);
         textField.value = "";
-      })
-      .catch((error) => {
+    } catch (error) {
         console.error("Error:", error);
         this.updateChatText(chatbox);
         textField.value = "";
-      });
+    }
   }
 
   updateChatText(chatbox) {
