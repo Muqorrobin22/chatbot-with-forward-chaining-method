@@ -224,6 +224,14 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if(this.subtopicState === "mou") {
+                const ansMou = await fetch("http://127.0.0.1:5000/fc/topics/informasi/mou")
+                const response = await ansMou.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
             }
 
             else {
@@ -314,8 +322,8 @@ class Chatbox {
           return "layanan"
       } else if(msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("loker") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
           return "peraturan_kunjungan"
-      } else if (msg.message.includes("batas") || msg.message.includes("masa") || msg.message.includes("maksimal") || msg.message.includes("panjang") || msg.message.includes("lama")) {
-        return "maksimal"
+      } else if (msg.message.includes("mou") ) {
+        return "mou"
       }
   }
 

@@ -131,6 +131,15 @@ def kunjungan_informasi_umum():
     return jsonify(message);
 
 
+@app.get("/fc/topics/informasi/mou")
+def mou_informasi_umum():
+    resp = """
+    MOU Perpustakaan PENS dapat dilihat pada laman berikut: https://perpustakaan.pens.ac.id/informasi-layanan/
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 @app.get("/fc/topics/informasi/fail")
 def fail_informasi_umum():
     resp = "Mohon maaf anda sekarang berada pada topik Informasi umum Perpustakaan, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Informasi umum Perpustakaan."
