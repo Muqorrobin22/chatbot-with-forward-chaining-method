@@ -110,6 +110,13 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if(detectedTopic === "koleksi") {
+                this.conversationState = detectedTopic;
+                msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Koleksi."}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
             }
 
             else {
@@ -366,6 +373,40 @@ class Chatbox {
             }
         }
 
+        // --------- koleksi ---------------
+        if(this.conversationState !== "normal" && this.conversationState === "koleksi") {
+            // let detectedSubTopic =
+            this.subtopicState = this.detectSubTopicKoleksi(msg2);
+            if(this.subtopicState === "jurnal") {
+                const ansJurnal = await fetch("http://127.0.0.1:5000/fc/topics/koleksi/jurnal")
+                const response = await ansJurnal.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            } else if (this.subtopicState === "ebook") {
+                const ansEbook = await fetch("http://127.0.0.1:5000/fc/topics/koleksi/ebook")
+                const response = await ansEbook.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
+
+            else {
+                const ansFail = await fetch("http://127.0.0.1:5000/fc/topics/koleksi/fail")
+                const response = await ansFail.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
+        }
+
+
 
     } catch (error) {
         console.error("Error:", error);
@@ -382,6 +423,7 @@ class Chatbox {
       const kelengkapanBerkasWisuda = ["lengkap", "berkas", "wisuda"]
       const berkasWisuda = ["berkas", "wisuda"]
       const visiDanMisi = ["visi", "misi"]
+      const koleksi = ["koleksi"]
 
       let pengembalianBukuValid = pengembalianBuku.every(element => text.message.includes(element));
       let peminjamanBukuValid = peminjamanBuku.every(element => text.message.includes(element));
@@ -390,6 +432,7 @@ class Chatbox {
       let kelengkapanBerkasWisudaValid = kelengkapanBerkasWisuda.every(element => text.message.includes(element))
       let berkasWisudaValid = berkasWisuda.every(element => text.message.includes(element))
       let visiDanMisiValid = visiDanMisi.every(element => text.message.includes(element))
+      let koleksiValid = koleksi.every(el => text.message.includes(el))
 
       if(pengembalianBukuValid) {
           return "pengembalian"
@@ -401,6 +444,8 @@ class Chatbox {
           return "berkas_wisuda"
       } else if(visiDanMisiValid) {
           return "visi_misi"
+      } else if(koleksiValid) {
+          return "koleksi"
       }
   }
 
@@ -502,15 +547,25 @@ class Chatbox {
   }
 
   detectSubTopicVisiDanMisi(msg) {
-      // const maksimalPeminjaman = ["batas", "masa", "maksimal", "panjang", "lama"]
-      // const syaratPeminjaman = ["syarat", "butuh", "pinjam"]
-      // const langkahPeminjaman = ["langkah", "cara", "tutorial", "tutor"]
-
-
       if(msg.message.includes("visi")) {
           return "visi"
       } else if(msg.message.includes('misi')) {
           return "misi"
+      }
+  }
+
+  detectSubTopicKoleksi(msg) {
+
+      const koleksiJurnal = ["koleksi", "jurnal"]
+      const koleksiEbook = ["koleksi", "ebook"]
+
+      let koleksiJurnalValid = koleksiJurnal.every(el => msg.message.includes(el))
+      let koleksiEbookValid = koleksiEbook.every(el => msg.message.includes(el))
+
+      if(msg.message.includes("jurnal") || koleksiJurnalValid) {
+          return "jurnal"
+      } else if(msg.message.includes('ebook') || koleksiEbookValid) {
+          return "ebook"
       }
   }
 

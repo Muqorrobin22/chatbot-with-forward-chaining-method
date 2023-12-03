@@ -256,5 +256,37 @@ def fail_topics_visidanMisi():
     return jsonify(message);
 
 
+@app.get("/fc/topics/koleksi/jurnal")
+def jurnal_koleksi():
+    resp = """
+    UPT Perpustakan Politeknik Elektronika Negeri Surabaya memiliki fasilitas internal akses jurnal cetak dan e-journal yang dapat dimanfaatkan pengguna yang terdiri dari:
+
+1. JETS (Journal of Engineering and Technological Sciences)
+2. JICTRA (Journal of ICT Research and Applications)
+3. KURSOR
+4. CommIT (Communication and Information Technology)
+5. IJEEI (International Journal on Electrical Engineering and Informatics)
+6. IJTECH (International Journal of Technology)
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
+
+@app.get("/fc/topics/koleksi/ebook")
+def ebook_koleksi():
+    resp = """
+    Koleksi E-Book PENS dapat di akses di link berikut: http://ebook.pens.ac.id/
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
+
+@app.get("/fc/topics/koleksi/fail")
+def fail_koleksi():
+    resp = "Mohon maaf anda sekarang berada pada topik Koleksi, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Koleksi."
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 if __name__ == "__main__":
     app.run(debug=True);
