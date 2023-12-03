@@ -96,6 +96,13 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if(detectedTopic === "berkas_wisuda") {
+                this.conversationState = detectedTopic;
+                msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Kelengkapan Berkas Wisuda."}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
             }
 
             else {
@@ -290,11 +297,15 @@ class Chatbox {
       const peminjamanBuku = ["pinjam", "buku"]
       const informasiUmum = ["informasi", "umum"]
       const informasiPerpustakaan = ["informasi", "pustaka"]
+      const kelengkapanBerkasWisuda = ["lengkap", "berkas", "wisuda"]
+      const berkasWisuda = ["berkas", "wisuda"]
 
       let pengembalianBukuValid = pengembalianBuku.every(element => text.message.includes(element));
       let peminjamanBukuValid = peminjamanBuku.every(element => text.message.includes(element));
       let informasiPerpustakaanValid = informasiPerpustakaan.every(element => text.message.includes(element));
       let informasiUmumValid = informasiUmum.every(element => text.message.includes(element))
+      let kelengkapanBerkasWisudaValid = kelengkapanBerkasWisuda.every(element => text.message.includes(element))
+      let berkasWisudaValid = berkasWisuda.every(element => text.message.includes(element))
 
       if(pengembalianBukuValid) {
           return "pengembalian"
@@ -302,6 +313,8 @@ class Chatbox {
           return "peminjaman"
       } else if(informasiPerpustakaanValid || informasiUmumValid) {
           return "informasi_umum"
+      } else if(kelengkapanBerkasWisudaValid || berkasWisudaValid) {
+          return "berkas_wisuda"
       }
   }
 
