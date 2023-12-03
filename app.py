@@ -35,6 +35,13 @@ def denda_pengembalian():
     return jsonify(message);
 
 
+@app.get("/fc/topics/pengembalian/maksimal")
+def maksimal_pengembalian():
+    resp = "Buku teks  bisa dipinjam sivitas akademika PENS dengan jangka waktu 3 (tiga) minggu atau 21 Hari. Dan dapat diperpanjang lagi, sepanjang tidak ada yang memesan"
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 @app.get("/fc/topics/pengembalian/kondisi")
 def kondisi_pengembalian():
     # answer = textProcessing(text)

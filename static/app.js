@@ -129,6 +129,14 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if (this.subtopicState === "maksimal") {
+                const ansMaksimal = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/maksimal")
+                const response = await ansMaksimal.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
             }
 
             else {
@@ -169,6 +177,8 @@ class Chatbox {
       // const langkahPengembalian = ["langkah", "cara", "tutorial", "tutor"]
       // const kondisiPengembalian = ["rusak", "kondisi", "hilang"]
       // const denda = ["denda"]
+      // const maksimalPengembalian = ["batas", "masa", "maksimal", "panjang", "lama"]
+      // const maksimalPeminjaman = ["batas", "masa", "maksimal", "panjang", "lama"]
 
 
       // let langkahPengembalianBuku = langkahPengembalian.every(element => msg.message.includes(element));
@@ -180,6 +190,8 @@ class Chatbox {
           return "kondisi"
       } else if(msg.message.includes("denda") || msg.message.includes("tentu")) {
           return "denda"
+      } else if (msg.message.includes("batas") || msg.message.includes("masa") || msg.message.includes("maksimal") || msg.message.includes("panjang") || msg.message.includes("lama")) {
+        return "maksimal"
       }
   }
 
