@@ -7,6 +7,7 @@ class Chatbox {
     };
 
     this.state = false;
+    this.welcomeState = false;
     this.messages = [];
     this.conversationState = "normal";
     this.subtopicState = null;
@@ -29,6 +30,23 @@ class Chatbox {
 
   toggleState(chatbox) {
     this.state = !this.state;
+
+
+    // Welcome State
+      if(this.state === true && !this.welcomeState ) {
+          this.welcomeState = true;
+          let welcomeMsg = {name: "Bot", message: "Halo Selamat datang di chatbot perpustakaan."}
+          this.messages.push(welcomeMsg);
+          this.updateChatText(chatbox);
+      }
+
+      // console.log("welcome state: ", this.welcomeState)
+      //
+      // if(this.welcomeState) {
+      //     let welcomeMsg = {name: "Bot", message: "Halo Selamat datang di chatbot perpustakaan."}
+      //     this.messages.push(welcomeMsg);
+      //     this.updateChatText(chatbox);
+      // }
 
     // show or hides the box
     if (this.state) {
