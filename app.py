@@ -210,6 +210,15 @@ Note: Wadah Cd telah disediakan oleh Perpustakaan
     return jsonify(message);
 
 
+@app.get("/fc/topics/berkas_wisuda/qr_code")
+def qr_code_kelengkapan_wisuda():
+    resp = """
+    QR Code untuk lembar pengesahan bisa diunduh di : online.mis.pens.ac.id
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 @app.get("/fc/topics/berkas_wisuda/fail")
 def fail_kelengkapan_wisuda():
     resp = "Mohon maaf anda sekarang berada pada topik Kelengkapan Berkas Wisuda, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Kelengkapan Data Wisuda."

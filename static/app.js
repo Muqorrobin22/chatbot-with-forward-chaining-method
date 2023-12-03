@@ -305,6 +305,14 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if(this.subtopicState === "qr_code") {
+                const ansQrCode = await fetch("http://127.0.0.1:5000/fc/topics/berkas_wisuda/qr_code")
+                const response = await ansQrCode.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
             }
 
             else {
@@ -432,6 +440,7 @@ class Chatbox {
   detectSubTopicKelengkapanBerkas(msg) {
       // const syaratWisuda = ["syarat", "buka", "tutup"]
       // const isCdProyekAkhir = ["cd", "dvd", "kaset"] || ["tentu", "cd"] || ["isi", "cd"]
+      // const codeQr = ["qr", "qrcode", "code", "kesah"] ||
 
       const ketentuanCd = ["tentu", "cd"]
       const isiCd = ["isi", "cd"]
@@ -443,6 +452,8 @@ class Chatbox {
           return "syarat_wisuda"
       } else if (msg.message.includes("kaset") || msg.message.includes("cd") || msg.message.includes("dvd") || ketentuanCdValid || isiCdValid ) {
           return "is_cd_proyek_akhir"
+      } else if(msg.message.includes("qr") || msg.message.includes("qrcode") || msg.message.includes("code") || msg.message.includes("kode") || msg.message.includes("kesah") ) {
+          return "qr_code"
       }
   }
 
