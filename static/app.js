@@ -240,6 +240,14 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if(this.subtopicState === "akreditasi") {
+                const ansAkreditasi = await fetch("http://127.0.0.1:5000/fc/topics/informasi/akreditasi")
+                const response = await ansAkreditasi.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
             }
 
             else {
@@ -334,6 +342,8 @@ class Chatbox {
         return "mou"
       } else if (msg.message.includes("struktur") || msg.message.includes("anggota")) {
           return "struktur"
+      } else if(msg.message.includes("sertifikat") || msg.message.includes("akreditasi")) {
+          return "akreditasi"
       }
   }
 

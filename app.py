@@ -148,6 +148,15 @@ def struktur_informasi_umum():
     message = {"answer": resp};
     return jsonify(message);
 
+
+@app.get("/fc/topics/informasi/akreditasi")
+def akreditasi_informasi_umum():
+    resp = """
+    Perpustakaan PENS telah mendapatkan nilai predikat "Akreditasi A" dan sertifikat akreditasi dapat dilihat di link berikut: https://perpustakaan.pens.ac.id/struktur-keanggotaan/
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
 @app.get("/fc/topics/informasi/fail")
 def fail_informasi_umum():
     resp = "Mohon maaf anda sekarang berada pada topik Informasi umum Perpustakaan, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Informasi umum Perpustakaan."
