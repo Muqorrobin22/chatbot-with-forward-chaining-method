@@ -116,6 +116,21 @@ Sabtu - Minggu: 10.00 - 14.00 WIB
     return jsonify(message);
 
 
+@app.get("/fc/topics/informasi/kunjungan")
+def kunjungan_informasi_umum():
+    resp = """
+    Kewajiban Anggota/Pengunjung Perpustakaan:
+1. Mentaati peraturan Perpustakaan PENS yang berlaku
+2. Mengisi presensi kehadiran di Perpustakaan PENS setiap berkunjung langsung ke perpustakaan
+3. Bertanggungjawab atas koleksi yang rusak/hilang saat peminjaman dan menerima sanksi yang berlaku
+4. Menjaga keamanan fasilitas yang disediakan perpustakaan
+5. Selalu menyimpan tas/jaket di locker yang disediakan saat akan memasuki ruang perpustakaan
+6. Tidak makan dan minum di ruang perpustakaan.
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 @app.get("/fc/topics/informasi/fail")
 def fail_informasi_umum():
     resp = "Mohon maaf anda sekarang berada pada topik Informasi umum Perpustakaan, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Informasi umum Perpustakaan."

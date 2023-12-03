@@ -209,8 +209,16 @@ class Chatbox {
             // let detectedSubTopic =
             this.subtopicState = this.detectSubTopicInformasiUmum(msg2);
             if(this.subtopicState === "layanan") {
-                const ansSyarat = await fetch("http://127.0.0.1:5000/fc/topics/informasi/layanan")
-                const response = await ansSyarat.json();
+                const ansLayanan = await fetch("http://127.0.0.1:5000/fc/topics/informasi/layanan")
+                const response = await ansLayanan.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            } else if(this.subtopicState === "peraturan_kunjungan") {
+                const ansKunjungan = await fetch("http://127.0.0.1:5000/fc/topics/informasi/kunjungan")
+                const response = await ansKunjungan.json();
                 msg2 = {name: "Bot", message: response.answer}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
@@ -304,8 +312,8 @@ class Chatbox {
 
       if(msg.message.includes("jam") || msg.message.includes("buka") || msg.message.includes("tutup")) {
           return "layanan"
-      } else if(msg.message.includes("syarat") || msg.message.includes("butuh")) {
-          return "syarat"
+      } else if(msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("loker") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
+          return "peraturan_kunjungan"
       } else if (msg.message.includes("batas") || msg.message.includes("masa") || msg.message.includes("maksimal") || msg.message.includes("panjang") || msg.message.includes("lama")) {
         return "maksimal"
       }
