@@ -232,6 +232,14 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if(this.subtopicState === "struktur") {
+                const ansStruktur = await fetch("http://127.0.0.1:5000/fc/topics/informasi/struktur")
+                const response = await ansStruktur.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
             }
 
             else {
@@ -324,6 +332,8 @@ class Chatbox {
           return "peraturan_kunjungan"
       } else if (msg.message.includes("mou") ) {
         return "mou"
+      } else if (msg.message.includes("struktur") || msg.message.includes("anggota")) {
+          return "struktur"
       }
   }
 
