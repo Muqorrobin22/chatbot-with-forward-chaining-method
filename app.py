@@ -195,6 +195,21 @@ def syarat_kelengkapan_wisuda():
     message = {"answer": resp};
     return jsonify(message);
 
+
+@app.get("/fc/topics/berkas_wisuda/cd")
+def cd_kelengkapan_wisuda():
+    resp = """
+    Ketentuan isi CD Proyek Akhir antara lain:
+1. File lengkap (cover s.d. lampiran) format .doc dan .pdf
+2. File program/software (bagi mahasiswa yang membuat program aplikasi)
+3. File presentasi format .ppt
+4. File jurnal (Khusus mahasiswa D4 dan S2)
+Note: Wadah Cd telah disediakan oleh Perpustakaan
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 @app.get("/fc/topics/berkas_wisuda/fail")
 def fail_kelengkapan_wisuda():
     resp = "Mohon maaf anda sekarang berada pada topik Kelengkapan Berkas Wisuda, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Kelengkapan Data Wisuda."
