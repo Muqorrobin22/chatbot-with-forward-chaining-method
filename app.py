@@ -166,6 +166,16 @@ def dikembalikan_informasi_umum():
     message = {"answer": resp};
     return jsonify(message);
 
+
+@app.get("/fc/topics/informasi/bebas_pinjam")
+def bebas_pinjam_informasi_umum():
+    resp = """
+    Mahasiswa D4 maupun S2 diperbolehkan untuk meminjam buku di perpustakaan D3. begitu pula sebaliknya, Mahasiswa D3 dan S2 juga diperbolehkan meminjam buku di perpustakaan D4.
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 @app.get("/fc/topics/informasi/fail")
 def fail_informasi_umum():
     resp = "Mohon maaf anda sekarang berada pada topik Informasi umum Perpustakaan, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Informasi umum Perpustakaan."

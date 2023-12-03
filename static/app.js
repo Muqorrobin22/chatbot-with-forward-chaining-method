@@ -256,6 +256,14 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if(this.subtopicState === "bebas_pinjam") {
+                const ansBebas = await fetch("http://127.0.0.1:5000/fc/topics/informasi/bebas_pinjam")
+                const response = await ansBebas.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
             }
 
             else {
@@ -346,6 +354,17 @@ class Chatbox {
       let dikembalikanOrangLainValid = dikembalikanOrangLain.every(element => msg.message.includes(element))
       let dikembalikanTemanValid = dikembalikanTeman.every(element => msg.message.includes(element))
 
+      // Bebas Pinjam
+      const bebasPinjamD3 = ["d", "pus"]
+      const bebasPinjamD4 = ["d", "pustaka"]
+      const bebasPinjamS2D3 = ["s", "pustaka", "d"]
+      const bebasPinjamS2D4 = ["s", "pus", "d"]
+
+      let bebasPinjamD3Valid = bebasPinjamD3.every(el => msg.message.includes(el))
+      let bebasPinjamD4Valid = bebasPinjamD4.every(el => msg.message.includes(el))
+      let bebasPinjamS2D3Valid = bebasPinjamS2D3.every(el => msg.message.includes(el))
+      let bebasPinjamS2D4Valid = bebasPinjamS2D4.every(el => msg.message.includes(el))
+
       if(msg.message.includes("jam") || msg.message.includes("buka") || msg.message.includes("tutup")) {
           return "layanan"
       } else if(msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("loker") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
@@ -358,6 +377,8 @@ class Chatbox {
           return "akreditasi"
       } else if (dikembalikanOrangLainValid || dikembalikanTemanValid) {
           return "dikembalikan_pihak_lain"
+      } else if(bebasPinjamD3Valid || bebasPinjamD4Valid || bebasPinjamS2D3Valid || bebasPinjamS2D4Valid) {
+          return "bebas_pinjam"
       }
   }
 
