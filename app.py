@@ -28,6 +28,13 @@ def langkah_pengembalian():
     return jsonify(message);
 
 
+@app.get("/fc/topics/pengembalian/denda")
+def denda_pengembalian():
+    resp = "Buku pinjaman harus dikembalikan sesuai tanggal yang tertera pada lembar tanggal kembali (due date) dalam keadaan baik seperti pada saat dipinjam. Pengembalian yang melampaui  batas tanggal tersebut dikenakan sanksi denda sebesar Rp500,00 per hari per eksemplar buku."
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 @app.get("/fc/topics/pengembalian/kondisi")
 def kondisi_pengembalian():
     # answer = textProcessing(text)

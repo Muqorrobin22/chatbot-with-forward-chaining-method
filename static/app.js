@@ -121,7 +121,17 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
-            } else {
+            } else if (this.subtopicState === "denda")  {
+                const ansDenda = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/denda")
+                const response = await ansDenda.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
+
+            else {
                 const ansPengembalian = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/fail")
                 const response = await ansPengembalian.json();
                 msg2 = {name: "Bot", message: response.answer}
@@ -158,6 +168,8 @@ class Chatbox {
   detectSubTopic(msg) {
       // const langkahPengembalian = ["langkah", "cara", "tutorial", "tutor"]
       // const kondisiPengembalian = ["rusak", "kondisi", "hilang"]
+      // const denda = ["denda"]
+
 
       // let langkahPengembalianBuku = langkahPengembalian.every(element => msg.message.includes(element));
       // let kondisiPengembalianBuku = kondisiPengembalian.every(element => msg.message.includes(element));
@@ -166,6 +178,8 @@ class Chatbox {
           return "langkah"
       } else if(msg.message.includes("kondisi") || msg.message.includes("rusak") || msg.message.includes("hilang")) {
           return "kondisi"
+      } else if(msg.message.includes("denda") || msg.message.includes("tentu")) {
+          return "denda"
       }
   }
 
