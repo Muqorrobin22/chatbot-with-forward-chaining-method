@@ -102,9 +102,11 @@ class Chatbox {
         // const rSub = await response.json();
         // let msgSub = { name: "Bot", message: rSub.answer };
         // console.log("msg sub: ", msgSub)
+
+        // --------- Pengembalian --------------
         if(this.conversationState !== "normal" && this.conversationState === "pengembalian") {
             // let detectedSubTopic =
-            this.subtopicState = this.detectSubTopic(msg2);
+            this.subtopicState = this.detectSubTopicPengembalian(msg2);
             if(this.subtopicState === "langkah") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/langkah")
                 const response = await ansLangkah.json();
@@ -151,6 +153,31 @@ class Chatbox {
         }
 
 
+        // --------- Peminjaman ---------------
+        if(this.conversationState !== "normal" && this.conversationState === "peminjaman") {
+            // let detectedSubTopic =
+            this.subtopicState = this.detectSubTopicPeminjaman(msg2);
+            if(this.subtopicState === "syarat") {
+                const ansSyarat = await fetch("http://127.0.0.1:5000/fc/topics/peminjaman/syarat")
+                const response = await ansSyarat.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
+
+            else {
+                const ansPengembalian = await fetch("http://127.0.0.1:5000/fc/topics/peminjaman/fail")
+                const response = await ansPengembalian.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
+        }
+
 
     } catch (error) {
         console.error("Error:", error);
@@ -173,13 +200,11 @@ class Chatbox {
       }
   }
 
-  detectSubTopic(msg) {
+  detectSubTopicPengembalian(msg) {
       // const langkahPengembalian = ["langkah", "cara", "tutorial", "tutor"]
       // const kondisiPengembalian = ["rusak", "kondisi", "hilang"]
-      // const denda = ["denda"]
+      // const dendaPengembalian = ["denda"]
       // const maksimalPengembalian = ["batas", "masa", "maksimal", "panjang", "lama"]
-      // const maksimalPeminjaman = ["batas", "masa", "maksimal", "panjang", "lama"]
-
 
       // let langkahPengembalianBuku = langkahPengembalian.every(element => msg.message.includes(element));
       // let kondisiPengembalianBuku = kondisiPengembalian.every(element => msg.message.includes(element));
@@ -190,6 +215,21 @@ class Chatbox {
           return "kondisi"
       } else if(msg.message.includes("denda") || msg.message.includes("tentu")) {
           return "denda"
+      } else if (msg.message.includes("batas") || msg.message.includes("masa") || msg.message.includes("maksimal") || msg.message.includes("panjang") || msg.message.includes("lama")) {
+        return "maksimal"
+      }
+  }
+
+  detectSubTopicPeminjaman(msg) {
+      // const maksimalPeminjaman = ["batas", "masa", "maksimal", "panjang", "lama"]
+      // const syaratPeminjaman = ["syarat", "butuh", "pinjam"]
+      // const langkahPeminjaman = ["langkah", "cara", "tutorial", "tutor"]
+
+
+      if(msg.message.includes("langkah") || msg.message.includes("cara") || msg.message.includes("tutorial") || msg.message.includes("tutor")) {
+          return "langkah"
+      } else if(msg.message.includes("syarat") || msg.message.includes("butuh") || msg.message.includes("pinjam")) {
+          return "syarat"
       } else if (msg.message.includes("batas") || msg.message.includes("masa") || msg.message.includes("maksimal") || msg.message.includes("panjang") || msg.message.includes("lama")) {
         return "maksimal"
       }

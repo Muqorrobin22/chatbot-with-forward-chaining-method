@@ -66,5 +66,19 @@ def fail_pengembalian():
     return jsonify(message);
 
 
+@app.get("/fc/topics/peminjaman/syarat")
+def syarat_peminjaman():
+    resp = "persyaratan peminjaman buku adalah membawa smartcard."
+    message = {"answer": resp};
+    return jsonify(message);
+
+
+@app.get("/fc/topics/peminjaman/fail")
+def fail_peminjaman():
+    resp = "Mohon maaf anda sekarang berada pada topik Peminjaman buku, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Peminjaman buku."
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 if __name__ == "__main__":
     app.run(debug=True);
