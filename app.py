@@ -90,6 +90,13 @@ kuning.  selanjutnya petugas akan  melakukan proses entry  peminjaman."""
     return jsonify(message);
 
 
+@app.get("/fc/topics/peminjaman/maksimal")
+def maksimal_peminjaman():
+    resp = "Buku teks  bisa dipinjam sivitas akademika PENS dengan jangka waktu 3 (tiga) minggu atau 21 Hari. Dan dapat diperpanjang lagi, sepanjang tidak ada yang memesan"
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 @app.get("/fc/topics/peminjaman/fail")
 def fail_peminjaman():
     resp = "Mohon maaf anda sekarang berada pada topik Peminjaman buku, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Peminjaman buku."

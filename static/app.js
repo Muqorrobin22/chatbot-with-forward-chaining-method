@@ -173,6 +173,14 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if (this.subtopicState === "maksimal") {
+                const ansBatas = await fetch("http://127.0.0.1:5000/fc/topics/peminjaman/maksimal")
+                const response = await ansBatas.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
             }
 
             else {
@@ -236,7 +244,7 @@ class Chatbox {
 
       if(msg.message.includes("langkah") || msg.message.includes("cara") || msg.message.includes("tutorial") || msg.message.includes("tutor")) {
           return "langkah"
-      } else if(msg.message.includes("syarat") || msg.message.includes("butuh") || msg.message.includes("pinjam")) {
+      } else if(msg.message.includes("syarat") || msg.message.includes("butuh")) {
           return "syarat"
       } else if (msg.message.includes("batas") || msg.message.includes("masa") || msg.message.includes("maksimal") || msg.message.includes("panjang") || msg.message.includes("lama")) {
         return "maksimal"
