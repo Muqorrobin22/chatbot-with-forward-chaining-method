@@ -333,6 +333,39 @@ class Chatbox {
             }
         }
 
+        // --------- Visi dan Misi ---------------
+        if(this.conversationState !== "normal" && this.conversationState === "visi_misi") {
+            // let detectedSubTopic =
+            this.subtopicState = this.detectSubTopicVisiDanMisi(msg2);
+            if(this.subtopicState === "visi") {
+                const ansVisi = await fetch("http://127.0.0.1:5000/fc/topics/visi_misi/visi")
+                const response = await ansVisi.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            } else if (this.subtopicState === "misi") {
+                const ansMisi = await fetch("http://127.0.0.1:5000/fc/topics/visi_misi/misi")
+                const response = await ansMisi.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
+
+            else {
+                const ansFail = await fetch("http://127.0.0.1:5000/fc/topics/visi_misi/fail")
+                const response = await ansFail.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
+        }
+
 
     } catch (error) {
         console.error("Error:", error);
@@ -465,6 +498,19 @@ class Chatbox {
           return "is_cd_proyek_akhir"
       } else if(msg.message.includes("qr") || msg.message.includes("qrcode") || msg.message.includes("code") || msg.message.includes("kode") || msg.message.includes("kesah") ) {
           return "qr_code"
+      }
+  }
+
+  detectSubTopicVisiDanMisi(msg) {
+      // const maksimalPeminjaman = ["batas", "masa", "maksimal", "panjang", "lama"]
+      // const syaratPeminjaman = ["syarat", "butuh", "pinjam"]
+      // const langkahPeminjaman = ["langkah", "cara", "tutorial", "tutor"]
+
+
+      if(msg.message.includes("visi")) {
+          return "visi"
+      } else if(msg.message.includes('misi')) {
+          return "misi"
       }
   }
 

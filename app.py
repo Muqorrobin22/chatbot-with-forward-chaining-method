@@ -226,5 +226,35 @@ def fail_kelengkapan_wisuda():
     return jsonify(message);
 
 
+@app.get("/fc/topics/visi_misi/visi")
+def visi_topics_visidanMisi():
+    resp = """
+    Sesuai dengan visi dan misi PENS, Perpustakaan PENS memiliki visi yakni:
+Menjadi perpustakaan yang unggul dengan fasilitas yang lengkap, modern dan mampu memberikan pelayanan terbaik kepada pemakainya dengan berbasis teknologi komputer.
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
+
+@app.get("/fc/topics/visi_misi/misi")
+def misi_topics_visidanMisi():
+    resp = """
+    Perpustakaan memiliki beberapa misi untuk mewujudkan visi yang telah kami paparkan diatas:
+1. Mengoleksi semua informasi yang berhubungan dengan ketentuan akademis di PENS.
+2. Mengelola informasi dengan canggih dan modern agar dapat diakses pemakai dengan mudah, cepat dan tepat.
+3. Memberikan fasilitas yang memadai kepada pemakai agar dapat mewujudkan fungsi perpustakaan sebagai sarana bantu proses belajar mengajar.
+4. Mengarahkan setiap program yang telah tersusun dengan baik sehingga dapat diwujudkan secara optimal sesuai dengan visi yang telah diuraikan.
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
+
+@app.get("/fc/topics/visi_misi/fail")
+def fail_topics_visidanMisi():
+    resp = "Mohon maaf anda sekarang berada pada topik Visi dan Misi, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Visi dan Misi."
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 if __name__ == "__main__":
     app.run(debug=True);
