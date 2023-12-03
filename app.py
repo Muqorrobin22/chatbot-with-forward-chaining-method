@@ -104,5 +104,24 @@ def fail_peminjaman():
     return jsonify(message);
 
 
+@app.get("/fc/topics/informasi/layanan")
+def layanan_informasi_umum():
+    resp = """Jam Layanan Perpustakaan: 
+Senin - Kamis : 08.00 - 16.30 WIB
+Jum'at        : 07.30 - 16.30 WIB 
+  (Istirahat) : 11.30 - 12.30 WIB
+Sabtu - Minggu: 10.00 - 14.00 WIB
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
+
+@app.get("/fc/topics/informasi/fail")
+def fail_informasi_umum():
+    resp = "Mohon maaf anda sekarang berada pada topik Informasi umum Perpustakaan, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Informasi umum Perpustakaan."
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 if __name__ == "__main__":
     app.run(debug=True);

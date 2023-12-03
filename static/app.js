@@ -204,6 +204,32 @@ class Chatbox {
         }
 
 
+        // --------- Informasi Umum Perpustakaan ---------------
+        if(this.conversationState !== "normal" && this.conversationState === "informasi_umum") {
+            // let detectedSubTopic =
+            this.subtopicState = this.detectSubTopicInformasiUmum(msg2);
+            if(this.subtopicState === "layanan") {
+                const ansSyarat = await fetch("http://127.0.0.1:5000/fc/topics/informasi/layanan")
+                const response = await ansSyarat.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
+
+            else {
+                const ansPengembalian = await fetch("http://127.0.0.1:5000/fc/topics/informasi/fail")
+                const response = await ansPengembalian.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
+        }
+
+
     } catch (error) {
         console.error("Error:", error);
         this.updateChatText(chatbox);
@@ -259,6 +285,25 @@ class Chatbox {
 
       if(msg.message.includes("langkah") || msg.message.includes("cara") || msg.message.includes("tutorial") || msg.message.includes("tutor")) {
           return "langkah"
+      } else if(msg.message.includes("syarat") || msg.message.includes("butuh")) {
+          return "syarat"
+      } else if (msg.message.includes("batas") || msg.message.includes("masa") || msg.message.includes("maksimal") || msg.message.includes("panjang") || msg.message.includes("lama")) {
+        return "maksimal"
+      }
+  }
+
+  detectSubTopicInformasiUmum(msg) {
+      // const jamLayanan = ["jam", "buka", "tutup"]
+      // const peraturanPengunjung = ["atur", 'wajib', 'tas', 'loker', 'jaket', 'makan', 'minum', 'presensi']
+      // const dikembalikanOrangLain = ["kembali", "orang"] || ["kembali", "teman"]
+      // const mou = ["mou"]
+      // const strukturKeanggotaan = ["struktur", "anggota"]
+      // const sertifikasiAkreditas = ["sertifikat", "akreditasi"]
+      // const bebasPinjam = ["d", "pus"] || ["d", "pustaka"] || ["s", "pustaka", "d"] || ["s", "pus", "d"]
+
+
+      if(msg.message.includes("jam") || msg.message.includes("buka") || msg.message.includes("tutup")) {
+          return "layanan"
       } else if(msg.message.includes("syarat") || msg.message.includes("butuh")) {
           return "syarat"
       } else if (msg.message.includes("batas") || msg.message.includes("masa") || msg.message.includes("maksimal") || msg.message.includes("panjang") || msg.message.includes("lama")) {
