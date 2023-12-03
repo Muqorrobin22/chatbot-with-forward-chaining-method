@@ -103,6 +103,13 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if(detectedTopic === "visi_misi") {
+                this.conversationState = detectedTopic;
+                msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Visi dan Misi."}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
             }
 
             else {
@@ -341,6 +348,7 @@ class Chatbox {
       const informasiPerpustakaan = ["informasi", "pustaka"]
       const kelengkapanBerkasWisuda = ["lengkap", "berkas", "wisuda"]
       const berkasWisuda = ["berkas", "wisuda"]
+      const visiDanMisi = ["visi", "misi"]
 
       let pengembalianBukuValid = pengembalianBuku.every(element => text.message.includes(element));
       let peminjamanBukuValid = peminjamanBuku.every(element => text.message.includes(element));
@@ -348,6 +356,7 @@ class Chatbox {
       let informasiUmumValid = informasiUmum.every(element => text.message.includes(element))
       let kelengkapanBerkasWisudaValid = kelengkapanBerkasWisuda.every(element => text.message.includes(element))
       let berkasWisudaValid = berkasWisuda.every(element => text.message.includes(element))
+      let visiDanMisiValid = visiDanMisi.every(element => text.message.includes(element))
 
       if(pengembalianBukuValid) {
           return "pengembalian"
@@ -357,6 +366,8 @@ class Chatbox {
           return "informasi_umum"
       } else if(kelengkapanBerkasWisudaValid || berkasWisudaValid) {
           return "berkas_wisuda"
+      } else if(visiDanMisiValid) {
+          return "visi_misi"
       }
   }
 
