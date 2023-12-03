@@ -157,6 +157,15 @@ def akreditasi_informasi_umum():
     message = {"answer": resp};
     return jsonify(message);
 
+
+@app.get("/fc/topics/informasi/dikembalikan")
+def dikembalikan_informasi_umum():
+    resp = """
+    Saat mengembalikan buku di perpustakaan, tidak perlu melakukannya atas nama peminjam. Diperbolehkan untuk mengembalikan buku dengan cara menitipkannya kepada teman, yang nantinya akan mengembalikannya ke perpustakaan.
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
 @app.get("/fc/topics/informasi/fail")
 def fail_informasi_umum():
     resp = "Mohon maaf anda sekarang berada pada topik Informasi umum Perpustakaan, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Informasi umum Perpustakaan."

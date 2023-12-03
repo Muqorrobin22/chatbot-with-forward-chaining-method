@@ -248,6 +248,14 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if(this.subtopicState === "dikembalikan_pihak_lain") {
+                const ansDikembalikan = await fetch("http://127.0.0.1:5000/fc/topics/informasi/dikembalikan")
+                const response = await ansDikembalikan.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
             }
 
             else {
@@ -333,6 +341,10 @@ class Chatbox {
       // const sertifikasiAkreditas = ["sertifikat", "akreditasi"]
       // const bebasPinjam = ["d", "pus"] || ["d", "pustaka"] || ["s", "pustaka", "d"] || ["s", "pus", "d"]
 
+      const dikembalikanOrangLain = ["kembali", "orang"]
+      const dikembalikanTeman =  ["kembali", "teman"]
+      let dikembalikanOrangLainValid = dikembalikanOrangLain.every(element => msg.message.includes(element))
+      let dikembalikanTemanValid = dikembalikanTeman.every(element => msg.message.includes(element))
 
       if(msg.message.includes("jam") || msg.message.includes("buka") || msg.message.includes("tutup")) {
           return "layanan"
@@ -344,6 +356,8 @@ class Chatbox {
           return "struktur"
       } else if(msg.message.includes("sertifikat") || msg.message.includes("akreditasi")) {
           return "akreditasi"
+      } else if (dikembalikanOrangLainValid || dikembalikanTemanValid) {
+          return "dikembalikan_pihak_lain"
       }
   }
 
