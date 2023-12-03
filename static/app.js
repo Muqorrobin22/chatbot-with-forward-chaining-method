@@ -36,11 +36,17 @@ class Chatbox {
       if(this.state === true && !this.welcomeState ) {
           this.welcomeState = true;
           let welcomeMsg = {name: "Bot", message: "Halo Selamat datang di chatbot perpustakaan PENS.\n\nChatbot kami bisa memberikan informasi seputar perpustakaan dengan berbagai macam topik. topik yang tersedia termasuk:\n\nPeminjaman Buku\nPengembalian Buku\nInformasi Umum Perpustakaan\nKelengkapan berkas wisuda\nVisi & Misi Perpustakaan\nKoleksi\n\nMulailah dengan mengambil topik dari informasi yang ingin diketahui."}
+
           // Replace newline characters with <br> tags
           let formattedString = welcomeMsg.message.replace(/\n/g, '<br>');
           welcomeMsg = {...welcomeMsg, message: formattedString}
+
           this.messages.push(welcomeMsg);
-          this.updateChatText(chatbox);
+
+          // menambahkan timeout agar lebih bagus
+          setTimeout(() => {
+            this.updateChatText(chatbox);
+          }, 1000)
       }
 
       // console.log("welcome state: ", this.welcomeState)
