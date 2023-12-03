@@ -285,6 +285,32 @@ class Chatbox {
         }
 
 
+        // --------- Kelengkapan Berkas Wisuda ---------------
+        if(this.conversationState !== "normal" && this.conversationState === "berkas_wisuda") {
+            // let detectedSubTopic =
+            this.subtopicState = this.detectSubTopicKelengkapanBerkas(msg2);
+            if(this.subtopicState === "syarat_wisuda") {
+                const ansSyarat = await fetch("http://127.0.0.1:5000/fc/topics/berkas_wisuda/syarat_wisuda")
+                const response = await ansSyarat.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
+
+            else {
+                const ansFail = await fetch("http://127.0.0.1:5000/fc/topics/berkas_wisuda/fail")
+                const response = await ansFail.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
+            }
+        }
+
+
     } catch (error) {
         console.error("Error:", error);
         this.updateChatText(chatbox);
@@ -392,6 +418,14 @@ class Chatbox {
           return "dikembalikan_pihak_lain"
       } else if(bebasPinjamD3Valid || bebasPinjamD4Valid || bebasPinjamS2D3Valid || bebasPinjamS2D4Valid) {
           return "bebas_pinjam"
+      }
+  }
+
+  detectSubTopicKelengkapanBerkas(msg) {
+      // const syaratWisuda = ["syarat", "buka", "tutup"]
+
+      if(msg.message.includes("syarat") || msg.message.includes("wisuda")) {
+          return "syarat_wisuda"
       }
   }
 

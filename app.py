@@ -183,5 +183,24 @@ def fail_informasi_umum():
     return jsonify(message);
 
 
+@app.get("/fc/topics/berkas_wisuda/syarat_wisuda")
+def syarat_kelengkapan_wisuda():
+    resp = """
+    Persyaratan yang harus di lengkapi sebelum wisuda antara lain:
+1. Upload Proyek Akhir di : tugasakhir.digilib.pens.ac.id
+2. Menyerahkan 1 eksemplar buku Proyek Akhir yang telah dijilid softcover dan mencantumkan QRCode
+3. Menyerahkan 1 keping CD Proyek Akhir yang berisi sesuai dengan ketentuan
+4. Setelah semua berkas telah di verifikasi oleh petugas dan tidak memiliki tanggungan pinjaman koleksi di perpustakaan maka mahasiswa akan mendapatkan surat keterangan perpustakaan secara online
+"""
+    message = {"answer": resp};
+    return jsonify(message);
+
+@app.get("/fc/topics/berkas_wisuda/fail")
+def fail_kelengkapan_wisuda():
+    resp = "Mohon maaf anda sekarang berada pada topik Kelengkapan Berkas Wisuda, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Kelengkapan Data Wisuda."
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 if __name__ == "__main__":
     app.run(debug=True);
