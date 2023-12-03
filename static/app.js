@@ -165,6 +165,14 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if (this.subtopicState === "langkah") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/fc/topics/peminjaman/langkah")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+                return;
             }
 
             else {

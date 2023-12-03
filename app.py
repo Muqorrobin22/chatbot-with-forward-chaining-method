@@ -73,6 +73,23 @@ def syarat_peminjaman():
     return jsonify(message);
 
 
+@app.get("/fc/topics/peminjaman/langkah")
+def langkah_peminjaman():
+    resp = """
+Jika persyaratan sudah dibawa, kamu bisa datang ke perpustakaan  kemudian kamu bisa melihat  ketersediaan buku di komputer
+
+OPAC yang berada di
+perpustakaan. kemudian anda bisa 
+mencari buku yang ingin anda pinjam sesuai dengan rak yang tercantum dalam informasi di komputer tadi.
+
+setelah andamenemukan buku, anda bisa  menuju ke
+bagian sirkulasi untuk  menunjukkan
+smartcard dan  menulis NRP di kartu
+kuning.  selanjutnya petugas akan  melakukan proses entry  peminjaman."""
+    message = {"answer": resp};
+    return jsonify(message);
+
+
 @app.get("/fc/topics/peminjaman/fail")
 def fail_peminjaman():
     resp = "Mohon maaf anda sekarang berada pada topik Peminjaman buku, mungkin bisa diperjelas lagi kebutuhan infromasi anda sekarang untuk Peminjaman buku."
