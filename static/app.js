@@ -7,6 +7,7 @@ class Chatbox {
     };
 
     this.state = false;
+    this.welcomeState = false;
     this.messages = [];
     this.conversationState = "normal";
     this.subtopicState = null;
@@ -29,6 +30,32 @@ class Chatbox {
 
   toggleState(chatbox) {
     this.state = !this.state;
+
+
+    // Welcome State
+      if(this.state === true && !this.welcomeState ) {
+          this.welcomeState = true;
+          let welcomeMsg = {name: "Bot", message: "Halo Selamat datang di chatbot perpustakaan PENS.\n\nChatbot kami bisa memberikan informasi seputar perpustakaan dengan berbagai macam topik. topik yang tersedia termasuk:\n\nPeminjaman Buku\nPengembalian Buku\nInformasi Umum Perpustakaan\nKelengkapan berkas wisuda\nVisi & Misi Perpustakaan\nKoleksi\n\nMulailah dengan mengambil topik dari informasi yang ingin diketahui."}
+
+          // Replace newline characters with <br> tags
+          let formattedString = welcomeMsg.message.replace(/\n/g, '<br>');
+          welcomeMsg = {...welcomeMsg, message: formattedString}
+
+          this.messages.push(welcomeMsg);
+
+          // menambahkan timeout agar lebih bagus
+          setTimeout(() => {
+            this.updateChatText(chatbox);
+          }, 1000)
+      }
+
+      // console.log("welcome state: ", this.welcomeState)
+      //
+      // if(this.welcomeState) {
+      //     let welcomeMsg = {name: "Bot", message: "Halo Selamat datang di chatbot perpustakaan."}
+      //     this.messages.push(welcomeMsg);
+      //     this.updateChatText(chatbox);
+      // }
 
     // show or hides the box
     if (this.state) {
@@ -76,7 +103,11 @@ class Chatbox {
             let detectedTopic = this.detectTopic(msg2)
             if(detectedTopic === "pengembalian") {
                 this.conversationState = detectedTopic;
-                msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Pengembalian buku."}
+                msg2 = {name: "Bot", message: "Sekarang anda masuk ke topik Pengembalian buku.\n\nInformasi yang bisa anda dapatkan meliputi:\nKondisi Buku ( Rusak / Hilang )\nLangkah Pengembalian\nBatas Peminjaman\nDenda\n"}
+
+                let formattedString = msg2.message.replace(/\n/g, '<br>');
+                msg2 = {...msg2, message: formattedString}
+
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
@@ -84,35 +115,56 @@ class Chatbox {
 
             }else if (detectedTopic === "peminjaman") {
                 this.conversationState = detectedTopic;
-                msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Peminjaman buku."}
+                msg2 = {name: "Bot", message: "Sekarang anda masuk ke topik Peminjaman buku.\n\nInformasi yang bisa anda dapatkan meliputi:\nSyarat Peminjaman\nLangkah Peminjaman\nBatas Peminjaman\n"}
+
+                let formattedString = msg2.message.replace(/\n/g, '<br>');
+                msg2 = {...msg2, message: formattedString}
+
+
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
             } else if(detectedTopic === 'informasi_umum') {
                 this.conversationState = detectedTopic;
-                msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Informasi Umum Perpustakaan."}
+                msg2 = {name: "Bot", message: "Sekarang anda masuk ke topik Informasi Umum Perpustakaan.\n\nInformasi yang bisa anda dapatkan meliputi:\nInformasi Jam Layanan\nPeraturan kunjungan ( Kewajiban / Presensi )\nMOU\nStruktur Keanggotaan Perpustakaan\nAkreditasi Perpustakaan\nPengembalian oleh pihak lain ( teman / orang lain )\nBebas Pinjam ( D3 ke perpus D4 dan sejenisnya )\n"}
+
+                let formattedString = msg2.message.replace(/\n/g, '<br>');
+                msg2 = {...msg2, message: formattedString}
+
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
             } else if(detectedTopic === "berkas_wisuda") {
                 this.conversationState = detectedTopic;
-                msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Kelengkapan Berkas Wisuda."}
+                msg2 = {name: "Bot", message: "Sekarang anda masuk ke topik Kelengkapan Berkas Wisuda.\n\nInformasi yang bisa anda dapatkan meliputi:\nSyarat Wisuda\nIsi CD / Ketentuan CD\nQR Code Pengesahan\n"}
+
+                let formattedString = msg2.message.replace(/\n/g, '<br>');
+                msg2 = {...msg2, message: formattedString}
+
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
             } else if(detectedTopic === "visi_misi") {
                 this.conversationState = detectedTopic;
-                msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Visi dan Misi."}
+                msg2 = {name: "Bot", message: "Sekarang anda masuk ke topik Visi dan Misi.\n\nInformasi yang bisa anda dapatkan meliputi:\nVisi Perpustakaan\nMisi Perpustakaan\n"}
+
+                let formattedString = msg2.message.replace(/\n/g, '<br>');
+                msg2 = {...msg2, message: formattedString}
+
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
             } else if(detectedTopic === "koleksi") {
                 this.conversationState = detectedTopic;
-                msg2 = {name: "Bot", message: "Sekarang anda masukk ke topik Koleksi."}
+                msg2 = {name: "Bot", message: "Sekarang anda masuk ke topik Koleksi.\n\nInformasi yang bisa anda dapatkan meliputi:\nKoleksi Jurnal\nKoleksi ebook\n"}
+
+                let formattedString = msg2.message.replace(/\n/g, '<br>');
+                msg2 = {...msg2, message: formattedString}
+
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
@@ -495,8 +547,10 @@ class Chatbox {
 
       const dikembalikanOrangLain = ["kembali", "orang"]
       const dikembalikanTeman =  ["kembali", "teman"]
+      const dikembalikanPihak =  ["kembali", "pihak"]
       let dikembalikanOrangLainValid = dikembalikanOrangLain.every(element => msg.message.includes(element))
       let dikembalikanTemanValid = dikembalikanTeman.every(element => msg.message.includes(element))
+      let dikembalikanPihakValid = dikembalikanPihak.every(element => msg.message.includes(element))
 
       // Bebas Pinjam
       const bebasPinjamD3 = ["d", "pus"]
@@ -519,7 +573,7 @@ class Chatbox {
           return "struktur"
       } else if(msg.message.includes("sertifikat") || msg.message.includes("akreditasi")) {
           return "akreditasi"
-      } else if (dikembalikanOrangLainValid || dikembalikanTemanValid) {
+      } else if (dikembalikanOrangLainValid || dikembalikanTemanValid || dikembalikanPihakValid) {
           return "dikembalikan_pihak_lain"
       } else if(bebasPinjamD3Valid || bebasPinjamD4Valid || bebasPinjamS2D3Valid || bebasPinjamS2D4Valid) {
           return "bebas_pinjam"
