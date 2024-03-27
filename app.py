@@ -288,5 +288,34 @@ def fail_koleksi():
     return jsonify(message);
 
 
+# Start of: Changed Version - Rule Based
+
+@app.get("/rule-based/syarat-peminjaman")
+def rule_base_syarat_peminjaman():
+    resp = "persyaratan peminjaman buku adalah membawa smartcard."
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/langkah-peminjaman")
+def rule_base_langkah_peminjaman():
+    resp = """
+Jika persyaratan sudah dibawa, kamu bisa datang ke perpustakaan  kemudian kamu bisa melihat  ketersediaan buku di komputer
+
+OPAC yang berada di
+perpustakaan. kemudian anda bisa 
+mencari buku yang ingin anda pinjam sesuai dengan rak yang tercantum dalam informasi di komputer tadi.
+
+setelah andamenemukan buku, anda bisa  menuju ke
+bagian sirkulasi untuk  menunjukkan
+smartcard dan  menulis NRP di kartu
+kuning.  selanjutnya petugas akan  melakukan proses entry  peminjaman.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+# End of: Changed Version - Rule Based
+
 if __name__ == "__main__":
     app.run(debug=True);

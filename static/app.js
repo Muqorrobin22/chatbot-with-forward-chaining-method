@@ -99,86 +99,6 @@ class Chatbox {
         let msg2 = { name: "Bot", message: r.answer };
         console.log(msg2)
 
-        if(this.conversationState === "normal") {
-            let detectedTopic = this.detectTopic(msg2)
-            if(detectedTopic === "pengembalian") {
-                this.conversationState = detectedTopic;
-                msg2 = {name: "Bot", message: "Sekarang anda masuk ke topik Pengembalian buku.\n\nInformasi yang bisa anda dapatkan meliputi:\nKondisi Buku ( Rusak / Hilang )\nLangkah Pengembalian\nBatas Peminjaman\nDenda\n"}
-
-                let formattedString = msg2.message.replace(/\n/g, '<br>');
-                msg2 = {...msg2, message: formattedString}
-
-                this.messages.push(msg2);
-                this.updateChatText(chatbox);
-                textField.value = "";
-                return;
-
-            }else if (detectedTopic === "peminjaman") {
-                this.conversationState = detectedTopic;
-                msg2 = {name: "Bot", message: "Sekarang anda masuk ke topik Peminjaman buku.\n\nInformasi yang bisa anda dapatkan meliputi:\nSyarat Peminjaman\nLangkah Peminjaman\nBatas Peminjaman\n"}
-
-                let formattedString = msg2.message.replace(/\n/g, '<br>');
-                msg2 = {...msg2, message: formattedString}
-
-
-                this.messages.push(msg2);
-                this.updateChatText(chatbox);
-                textField.value = "";
-                return;
-            } else if(detectedTopic === 'informasi_umum') {
-                this.conversationState = detectedTopic;
-                msg2 = {name: "Bot", message: "Sekarang anda masuk ke topik Informasi Umum Perpustakaan.\n\nInformasi yang bisa anda dapatkan meliputi:\nInformasi Jam Layanan\nPeraturan kunjungan ( Kewajiban / Presensi )\nMOU\nStruktur Keanggotaan Perpustakaan\nAkreditasi Perpustakaan\nPengembalian oleh pihak lain ( teman / orang lain )\nBebas Pinjam ( D3 ke perpus D4 dan sejenisnya )\n"}
-
-                let formattedString = msg2.message.replace(/\n/g, '<br>');
-                msg2 = {...msg2, message: formattedString}
-
-                this.messages.push(msg2);
-                this.updateChatText(chatbox);
-                textField.value = "";
-                return;
-            } else if(detectedTopic === "berkas_wisuda") {
-                this.conversationState = detectedTopic;
-                msg2 = {name: "Bot", message: "Sekarang anda masuk ke topik Kelengkapan Berkas Wisuda.\n\nInformasi yang bisa anda dapatkan meliputi:\nSyarat Wisuda\nIsi CD / Ketentuan CD\nQR Code Pengesahan\n"}
-
-                let formattedString = msg2.message.replace(/\n/g, '<br>');
-                msg2 = {...msg2, message: formattedString}
-
-                this.messages.push(msg2);
-                this.updateChatText(chatbox);
-                textField.value = "";
-                return;
-            } else if(detectedTopic === "visi_misi") {
-                this.conversationState = detectedTopic;
-                msg2 = {name: "Bot", message: "Sekarang anda masuk ke topik Visi dan Misi.\n\nInformasi yang bisa anda dapatkan meliputi:\nVisi Perpustakaan\nMisi Perpustakaan\n"}
-
-                let formattedString = msg2.message.replace(/\n/g, '<br>');
-                msg2 = {...msg2, message: formattedString}
-
-                this.messages.push(msg2);
-                this.updateChatText(chatbox);
-                textField.value = "";
-                return;
-            } else if(detectedTopic === "koleksi") {
-                this.conversationState = detectedTopic;
-                msg2 = {name: "Bot", message: "Sekarang anda masuk ke topik Koleksi.\n\nInformasi yang bisa anda dapatkan meliputi:\nKoleksi Jurnal\nKoleksi ebook\n"}
-
-                let formattedString = msg2.message.replace(/\n/g, '<br>');
-                msg2 = {...msg2, message: formattedString}
-
-                this.messages.push(msg2);
-                this.updateChatText(chatbox);
-                textField.value = "";
-                return;
-            }
-
-            else {
-                msg2 = {name: "Bot", message: "Maaf kami tidak tau maksud anda"}
-                this.messages.push(msg2);
-                this.updateChatText(chatbox);
-                textField.value = "";
-                return;
-            }
-        }
 
 
         // const rSub = await response.json();
@@ -186,36 +106,19 @@ class Chatbox {
         // console.log("msg sub: ", msgSub)
 
         // --------- Pengembalian --------------
-        if(this.conversationState !== "normal" && this.conversationState === "pengembalian") {
             // let detectedSubTopic =
-            this.subtopicState = this.detectSubTopicPengembalian(msg2);
-            if(this.subtopicState === "langkah") {
-                const ansLangkah = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/langkah")
+            this.subtopicState = this.ruleBaseDetect(msg2);
+            if(this.subtopicState === "syarat_peminjaman") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/syarat-peminjaman")
                 const response = await ansLangkah.json();
                 msg2 = {name: "Bot", message: response.answer}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
-            } else if(this.subtopicState === "kondisi") {
-                const ansKondisi = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/kondisi")
-                const response = await ansKondisi.json();
-                msg2 = {name: "Bot", message: response.answer}
-                this.messages.push(msg2);
-                this.updateChatText(chatbox);
-                textField.value = "";
-                return;
-            } else if (this.subtopicState === "denda")  {
-                const ansDenda = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/denda")
-                const response = await ansDenda.json();
-                msg2 = {name: "Bot", message: response.answer}
-                this.messages.push(msg2);
-                this.updateChatText(chatbox);
-                textField.value = "";
-                return;
-            } else if (this.subtopicState === "maksimal") {
-                const ansMaksimal = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/maksimal")
-                const response = await ansMaksimal.json();
+            } else if(this.subtopicState === "langkah_peminjaman") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/langkah-peminjaman")
+                const response = await ansLangkah.json();
                 msg2 = {name: "Bot", message: response.answer}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
@@ -224,15 +127,14 @@ class Chatbox {
             }
 
             else {
-                const ansPengembalian = await fetch("http://127.0.0.1:5000/fc/topics/pengembalian/fail")
-                const response = await ansPengembalian.json();
-                msg2 = {name: "Bot", message: response.answer}
+
+                msg2 = {name: "Bot", message: "Maaf kami tidak tahu maksud anda, Mungkin bisa bertanya lebih spesifik"}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
             }
-        }
+
 
 
         // --------- Peminjaman ---------------
@@ -425,38 +327,7 @@ class Chatbox {
             }
         }
 
-        // --------- koleksi ---------------
-        if(this.conversationState !== "normal" && this.conversationState === "koleksi") {
-            // let detectedSubTopic =
-            this.subtopicState = this.detectSubTopicKoleksi(msg2);
-            if(this.subtopicState === "jurnal") {
-                const ansJurnal = await fetch("http://127.0.0.1:5000/fc/topics/koleksi/jurnal")
-                const response = await ansJurnal.json();
-                msg2 = {name: "Bot", message: response.answer}
-                this.messages.push(msg2);
-                this.updateChatText(chatbox);
-                textField.value = "";
-                return;
-            } else if (this.subtopicState === "ebook") {
-                const ansEbook = await fetch("http://127.0.0.1:5000/fc/topics/koleksi/ebook")
-                const response = await ansEbook.json();
-                msg2 = {name: "Bot", message: response.answer}
-                this.messages.push(msg2);
-                this.updateChatText(chatbox);
-                textField.value = "";
-                return;
-            }
 
-            else {
-                const ansFail = await fetch("http://127.0.0.1:5000/fc/topics/koleksi/fail")
-                const response = await ansFail.json();
-                msg2 = {name: "Bot", message: response.answer}
-                this.messages.push(msg2);
-                this.updateChatText(chatbox);
-                textField.value = "";
-                return;
-            }
-        }
 
 
 
@@ -518,6 +389,42 @@ class Chatbox {
           return "denda"
       } else if (msg.message.includes("batas") || msg.message.includes("masa") || msg.message.includes("maksimal") || msg.message.includes("panjang") || msg.message.includes("lama")) {
         return "maksimal"
+      }
+  }
+
+  ruleBaseDetect(msg) {
+
+      // Start of: Rules - Syarat Peminjaman
+
+      const rule1_syarat_peminjaman = ["syarat", "pinjam"]
+      const rule2_syarat_peminjaman = ["bawa", "pinjam"]
+      const rule3_syarat_peminjaman = ["butuh", "pinjam"]
+
+      let rule1_SP_isValid = rule1_syarat_peminjaman.every(el => msg.message.includes(el))
+      let rule2_SP_isValid = rule2_syarat_peminjaman.every(el => msg.message.includes(el))
+      let rule3_SP_isValid = rule3_syarat_peminjaman.every(el => msg.message.includes(el))
+
+      // End of: Rules - Syarat Peminjaman
+
+
+      // Start of: Rules - Langkah Peminjaman
+
+      const rule1_langkah_peminjaman = ["langkah", "pinjam"]
+      const rule2_langkah_peminjaman = ["cara", "pinjam"]
+      const rule3_langkah_peminjaman = ["tutor", "pinjam"]
+      const rule4_langkah_peminjaman = ["prosedur", "pinjam"]
+
+      let rule1_LP_isValid = rule1_langkah_peminjaman.every(el => msg.message.includes(el))
+      let rule2_LP_isValid = rule2_langkah_peminjaman.every(el => msg.message.includes(el))
+      let rule3_LP_isValid = rule3_langkah_peminjaman.every(el => msg.message.includes(el))
+      let rule4_LP_isValid = rule4_langkah_peminjaman.every(el => msg.message.includes(el))
+
+      // End of: Rules - Langkah Peminjaman
+
+      if(rule1_SP_isValid || rule2_SP_isValid || rule3_SP_isValid) {
+          return "syarat_peminjaman"
+      } else if( rule1_LP_isValid || rule2_LP_isValid || rule3_LP_isValid || rule4_LP_isValid ) {
+          return "langkah_peminjaman"
       }
   }
 
