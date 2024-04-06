@@ -314,6 +314,42 @@ kuning.  selanjutnya petugas akan  melakukan proses entry  peminjaman.
     message = {"answer": resp};
     return jsonify(message)
 
+@app.get("/rule-based/langkah-pengembalian")
+def rule_base_langkah_pengembalian():
+    resp = """
+Langkah pengembalian buku:
+1. Membawa buku ke perpustakaan dan serahkan ke bagian layanan sirkulasi 
+2. Kemudian nanma dan nrp anda akan di data dan pastikan keadaan buku saat dikembalikan masih tetap utuh seperti saat peminjaman
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/kondisi-rusak")
+def rule_base_kondisi_rusak():
+    resp = """
+Buku yang rusak atau hilang selama masa pinjaman menjadi tanggung jawab peminjam sepenuhnya. Buku yang rusak harus semaksimal mungkin diperbaiki sehingga kembali baik seperti semula
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/kondisi-hilang-1")
+def rule_base_kondisi_hilang_1():
+    resp = """
+Jika buku yang dipinjam hilang, maka anda harus mengganti dengan buku yang sama (baik judul, pengarang, maupun penerbitnya sedangkan edisi dan tahun terbit boleh berbeda tetapi yang lebih baru)
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/kondisi-hilang-2")
+def rule_base_kondisi_hilang_2():
+    resp = """
+Apabila anda tidak menemukan buku yang sama, maka anda harus mengkopi buku eksemplar lain milik perpustakaan jika buku tersebut ada lebih dari satucopy. Jika tidak, maka anda harus mencari buku dengan subyek yang sama atau hampir sama meskipun judul, pengarang dan penerbit berbeda. 
+"""
+    message = {"answer": resp};
+    return jsonify(message)
 
 # End of: Changed Version - Rule Based
 

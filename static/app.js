@@ -124,6 +124,34 @@ class Chatbox {
                 this.updateChatText(chatbox);
                 textField.value = "";
                 return;
+            } else if(this.subtopicState === "langkah_pengembalian") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/langkah-pengembalian")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "kondisi_rusak") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/kondisi-rusak")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "kondisi_hilang") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/kondisi-hilang-1")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "kondisi_hilang2") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/kondisi-hilang-2")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
             }
 
             else {
@@ -421,11 +449,65 @@ class Chatbox {
 
       // End of: Rules - Langkah Peminjaman
 
+      // Start of: Rules - Langkah Pengembalian
+
+      const rule1_langkah_pengembalian = ["langkah", "kembali"]
+      const rule2_langkah_pengembalian = ["cara", "kembali"]
+      const rule3_langkah_pengembalian = ["tutor", "kembali"]
+      const rule4_langkah_pengembalian = ["prosedur", "kembali"]
+
+      let rule1_LPengembalian_isValid = rule1_langkah_pengembalian.every(el => msg.message.includes(el))
+      let rule2_LPengembalian_isValid = rule2_langkah_pengembalian.every(el => msg.message.includes(el))
+      let rule3_LPengembalian_isValid = rule3_langkah_pengembalian.every(el => msg.message.includes(el))
+      let rule4_LPengembalian_isValid = rule4_langkah_pengembalian.every(el => msg.message.includes(el))
+
+      // End of: Rules - Langkah Pengembalian
+
+
+      // Start of: Rules - Kondisi Rusak
+
+      const rule1_buku_rusak = ["buku", "rusak"]
+
+      let rule1_buku_rusak_isValid = rule1_buku_rusak.every(el => msg.message.includes(el))
+
+      // End of: Rules - Kondisi Rusak
+
+      // Start of: Rules - Kondisi Hilang
+
+      const rule1_buku_hilang = ["buku", "hilang"]
+
+      let rule1_buku_hilang_isValid = rule1_buku_hilang.every(el => msg.message.includes(el))
+
+      // End of: Rules - Kondisi Hilang
+
+      // Start of: Rules - Kondisi Hilang 2
+
+      const rule1_buku_hilang2 = ["buku", "sama"]
+      const rule2_buku_hilang2 = ["buku", "persis"]
+
+      let rule1_buku_hilang2_isValid = rule1_buku_hilang2.every(el => msg.message.includes(el))
+      let rule2_buku_hilang2_isValid = rule2_buku_hilang2.every(el => msg.message.includes(el))
+
+      // End of: Rules - Kondisi Hilang 2
+
+
+
       if(rule1_SP_isValid || rule2_SP_isValid || rule3_SP_isValid) {
           return "syarat_peminjaman"
       } else if( rule1_LP_isValid || rule2_LP_isValid || rule3_LP_isValid || rule4_LP_isValid ) {
           return "langkah_peminjaman"
+      } else if (rule1_LPengembalian_isValid || rule2_LPengembalian_isValid || rule3_LPengembalian_isValid || rule4_LPengembalian_isValid) {
+          return "langkah_pengembalian"
+      } else if (rule1_buku_rusak_isValid || msg.message.includes("rusak")) {
+          return "kondisi_rusak"
+      }else if (rule1_buku_hilang_isValid || msg.message.includes("hilang")) {
+          return "kondisi_hilang"
+      } else if (rule1_buku_hilang2_isValid || rule2_buku_hilang2_isValid) {
+          return "kondisi_hilang2"
       }
+
+
+
   }
 
   detectSubTopicPeminjaman(msg) {
