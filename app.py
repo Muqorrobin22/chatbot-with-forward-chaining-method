@@ -351,6 +351,62 @@ Apabila anda tidak menemukan buku yang sama, maka anda harus mengkopi buku eksem
     message = {"answer": resp};
     return jsonify(message)
 
+
+@app.get("/rule-based/maksimal-pinjam")
+def rule_base_kondisi_maksimal_peminjaman():
+    resp = """
+Buku teks  bisa dipinjam sivitas akademika PENS dengan jangka waktu 3 (tiga) minggu atau 21 Hari. Dan dapat diperpanjang lagi, sepanjang tidak ada yang memesan 
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+@app.get("/rule-based/denda")
+def rule_base_kondisi_denda():
+    resp = """
+ 
+Pengembalian yang melampaui  batas pengembalian akan dikenakan sanksi denda sebesar Rp500,00 per-hari per eksemplar buku.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/informasi-jam-layanan")
+def rule_base_informasi_jam_layanan():
+    resp = """
+
+Jam Layanan Perpustakaan: 
+Senin - Kamis : 08.00 - 16.30 WIB
+Jum'at        : 07.30 - 16.30 WIB 
+  (Istirahat) : 11.30 - 12.30 WIB
+Sabtu - Minggu: 10.00 - 14.00 WIB
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+@app.get("/rule-based/peraturan-pengunjung")
+def rule_base_dikembalikan_orang_lain():
+    resp = """
+
+Kewajiban Anggota/Pengunjung Perpustakaan:
+1. Mentaati peraturan Perpustakaan PENS yang berlaku
+2. Mengisi presensi kehadiran di Perpustakaan PENS setiap berkunjung langsung ke perpustakaan
+3. Bertanggungjawab atas koleksi yang rusak/hilang saat peminjaman dan menerima sanksi yang berlaku
+4. Menjaga keamanan fasilitas yang disediakan perpustakaan
+5. Selalu menyimpan tas/jaket di locker yang disediakan saat akan memasuki ruang perpustakaan
+6. Tidak makan dan minum di ruang perpustakaan.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+@app.get("/rule-based/dikembalikan-orang-lain")
+def rule_base_informasi_peraturan_pengunjung():
+    resp = """
+
+Saat mengembalikan buku di perpustakaan, tidak perlu melakukannya atas nama peminjam. Diperbolehkan untuk mengembalikan buku dengan cara menitipkannya kepada teman, yang nantinya akan mengembalikannya ke perpustakaan.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
 # End of: Changed Version - Rule Based
 
 if __name__ == "__main__":

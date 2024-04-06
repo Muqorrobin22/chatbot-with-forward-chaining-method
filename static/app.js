@@ -152,6 +152,41 @@ class Chatbox {
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
+            }else if(this.subtopicState === "maksimal_pinjam") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/maksimal-pinjam")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "denda") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/denda")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "informasi_jam_layanan") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/informasi-jam-layanan")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "peraturan_pengunjung") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/peraturan-pengunjung")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "dikembalikan_orang_lain") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/dikembalikan-orang-lain")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
             }
 
             else {
@@ -490,6 +525,28 @@ class Chatbox {
 
       // End of: Rules - Kondisi Hilang 2
 
+      // Start of: Rules - Maksimal Peminjaman
+
+      const rule1_maksimal_pinjam = ["batas", "pinjam"]
+      const rule2_maksimal_pinjam = ["masa", "pinjam"]
+      const rule3_maksimal_pinjam = ["maksimal", "pinjam"]
+      const rule4_maksimal_pinjam = ["panjang", "pinjam"]
+
+      let rule1_maksimal_pinjam_isValid = rule1_maksimal_pinjam.every(el => msg.message.includes(el))
+      let rule2_maksimal_pinjam_isValid = rule2_maksimal_pinjam.every(el => msg.message.includes(el))
+      let rule3_maksimal_pinjam_isValid = rule3_maksimal_pinjam.every(el => msg.message.includes(el))
+      let rule4_maksimal_pinjam_isValid = rule4_maksimal_pinjam.every(el => msg.message.includes(el))
+
+      // End of: Rules - Maksimal Peminjaman
+
+      // Start of: Rules - Aturan dikembalikan orang lain
+
+      const rule1_dikembalikan_orang_lain = ["kembali", "teman"]
+
+      let rule1_dikembalikan_orang_lain_isValid = rule1_dikembalikan_orang_lain.every(el => msg.message.includes(el))
+
+      // End of: Rules - Aturan dikembalikan orang lain
+
 
 
       if(rule1_SP_isValid || rule2_SP_isValid || rule3_SP_isValid) {
@@ -504,6 +561,16 @@ class Chatbox {
           return "kondisi_hilang"
       } else if (rule1_buku_hilang2_isValid || rule2_buku_hilang2_isValid) {
           return "kondisi_hilang2"
+      }else if (rule1_maksimal_pinjam_isValid || rule2_maksimal_pinjam_isValid || rule3_maksimal_pinjam_isValid || rule4_maksimal_pinjam_isValid) {
+          return "maksimal_pinjam"
+      } else if(msg.message.includes("denda")) {
+          return "denda"
+      }else if(msg.message.includes("jam") || msg.message.includes("buka") || msg.message.includes("tutup")) {
+          return "informasi_jam_layanan"
+      } else if (msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("loker") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
+            return "peraturan_pengunjung"
+      } else if (rule1_dikembalikan_orang_lain_isValid || msg.message.includes("kembali")) {
+          return "dikembalikan_orang_lain"
       }
 
 
