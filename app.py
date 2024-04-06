@@ -407,6 +407,164 @@ Saat mengembalikan buku di perpustakaan, tidak perlu melakukannya atas nama pemi
     message = {"answer": resp};
     return jsonify(message)
 
+
+@app.get("/rule-based/mou")
+def rule_base_mou():
+    resp = """
+
+MOU Perpustakaan PENS dapat dilihat pada laman berikut: https://perpustakaan.pens.ac.id/informasi-layanan/
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+@app.get("/rule-based/struktur-keanggotaan")
+def rule_base_struktur_keanggotaan():
+    resp = """
+
+Struktur Keanggotaan Perpustakaan PENS dapa dilihat pada lamaan berikut: https://perpustakaan.pens.ac.id/struktur-keanggotaan/
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/sertifikat-akreditasi")
+def rule_base_sertifikat_akreditasi():
+    resp = """
+
+Perpustakaan PENS telah mendapatkan nilai predikat "Akreditasi A" dan sertifikat akreditasi dapat dilihat di link berikut: https://perpustakaan.pens.ac.id/struktur-keanggotaan/
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/bebas-pinjam")
+def rule_base_bebas_pinjam():
+    resp = """
+
+Mahasiswa D4 maupun S2 diperbolehkan untuk meminjam buku di perpustakaan D3. begitu pula sebaliknya, Mahasiswa D3 dan S2 juga diperbolehkan meminjam buku di perpustakaan D4
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/syarat-wisuda")
+def rule_syarat_wisuda():
+    resp = """
+
+Persyaratan yang harus di lengkapi sebelum wisuda antara lain:
+1. Upload Proyek Akhir di : tugasakhir.digilib.pens.ac.id
+2. Menyerahkan 1 eksemplar buku Proyek Akhir yang telah dijilid softcover dan mencantumkan QRCode
+3. Menyerahkan 1 keping CD Proyek Akhir yang berisi sesuai dengan ketentuan
+4. Setelah semua berkas telah di verifikasi oleh petugas dan tidak memiliki tanggungan pinjaman koleksi di perpustakaan maka mahasiswa akan mendapatkan surat keterangan perpustakaan secara online
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+@app.get("/rule-based/cd-proyek-akhir")
+def rule_cs_proyek_akhir():
+    resp = """
+Ketentuan isi CD Proyek Akhir antara lain:
+1. File lengkap (cover s.d. lampiran) format .doc dan .pdf
+2. File program/software (bagi mahasiswa yang membuat program aplikasi)
+3. File presentasi format .ppt
+4. File jurnal (Khusus mahasiswa D4 dan S2)
+Note: Wadah Cd telah disediakan oleh Perpustakaan
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/qrcode-pengesahan")
+def rule_pengesahan():
+    resp = """
+QR Code untuk lembar pengesahan bisa diunduh di : online.mis.pens.ac.id
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/visi")
+def rule_visi():
+    resp = """
+Sesuai dengan visi dan misi PENS, Perpustakaan PENS memiliki visi yakni:
+Menjadi perpustakaan yang unggul dengan fasilitas yang lengkap, modern dan mampu memberikan pelayanan terbaik kepada pemakainya dengan berbasis teknologi komputer.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/misi")
+def rule_misi():
+    resp = """
+Perpustakaan memiliki beberapa misi untuk mewujudkan visi yang telah kami paparkan diatas:
+1. Mengoleksi semua informasi yang berhubungan dengan ketentuan akademis di PENS.
+2. Mengelola informasi dengan canggih dan modern agar dapat diakses pemakai dengan mudah, cepat dan tepat.
+3. Memberikan fasilitas yang memadai kepada pemakai agar dapat mewujudkan fungsi perpustakaan sebagai sarana bantu proses belajar mengajar.
+4. Mengarahkan setiap program yang telah tersusun dengan baik sehingga dapat diwujudkan secara optimal sesuai dengan visi yang telah diuraikan.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/koleksi-jurnal")
+def rule_koleksi_jurnal():
+    resp = """
+UPT Perpustakan Politeknik Elektronika Negeri Surabaya memiliki fasilitas internal akses jurnal cetak dan e-journal yang dapat dimanfaatkan pengguna yang terdiri dari:
+
+1. JETS (Journal of Engineering and Technological Sciences)
+2. JICTRA (Journal of ICT Research and Applications)
+3. KURSOR
+4. CommIT (Communication and Information Technology)
+5. IJEEI (International Journal on Electrical Engineering and Informatics)
+6. IJTECH (International Journal of Technology)
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/koleksi-ebook")
+def rule_koleksi_ebook():
+    resp = """
+Koleksi E-Book PENS dapat di akses di link berikut: http://ebook.pens.ac.id/
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+
+@app.get("/rule-based/pinjam-confirm")
+def rule_pinjam_confirm():
+    resp = """
+Apa yang ingin Anda tanyakan, apakah mengenai syarat peminjaman buku, cara peminjaman buku, atau hal lainnya?
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/kembali-confirm")
+def rule_kembali_confirm():
+    resp = """
+
+Apa yang ingin Anda tanyakan, apakah mengenai cara pengembalian buku, aturan pengembalian buku, atau hal lainnya?
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/syarat-confirm")
+def rule_syarat_confirm():
+    resp = """
+
+
+Apa yang ingin Anda tanyakan, apakah mengenai persyaratan peminjaman buku, pengembalian buku, atau persyaratan wisuda?
+
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+
+
 # End of: Changed Version - Rule Based
 
 if __name__ == "__main__":

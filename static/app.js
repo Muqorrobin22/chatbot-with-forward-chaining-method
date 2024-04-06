@@ -187,6 +187,104 @@ class Chatbox {
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
+            }else if(this.subtopicState === "mou") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/mou")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "struktur_keanggotaan") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/struktur-keanggotaan")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "sertifikat_akreditasi") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/sertifikat-akreditasi")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "bebas_pinjam") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/bebas-pinjam")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            } else if(this.subtopicState === "syarat_wisuda") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/syarat-wisuda")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "Isi_CD_Proyek_Akhir") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/cd-proyek-akhir")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "qrcode_pengesahan") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/qrcode-pengesahan")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "visi") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/visi")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "misi") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/misi")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "koleksi_jurnal") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/koleksi-jurnal")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "koleksi_ebook") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/koleksi-ebook")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "pinjam_confirm") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/pinjam-confirm")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "kembali_confirm") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/kembali-confirm")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "syarat_confirm") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/syarat-confirm")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: response.answer}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
             }
 
             else {
@@ -547,6 +645,53 @@ class Chatbox {
 
       // End of: Rules - Aturan dikembalikan orang lain
 
+      // Start of: Rules - Aturan Bebas Pinjam
+
+      const bebasPinjamD3 = ["d", "pus"]
+      const bebasPinjamD4 = ["d", "pustaka"]
+      const bebasPinjamS2D3 = ["s", "pustaka", "d"]
+      const bebasPinjamS2D4 = ["s", "pus", "d"]
+
+      let bebasPinjamD3Valid = bebasPinjamD3.every(el => msg.message.includes(el))
+      let bebasPinjamD4Valid = bebasPinjamD4.every(el => msg.message.includes(el))
+      let bebasPinjamS2D3Valid = bebasPinjamS2D3.every(el => msg.message.includes(el))
+      let bebasPinjamS2D4Valid = bebasPinjamS2D4.every(el => msg.message.includes(el))
+
+      // End of: Rules - Aturan Bebas Pinjam
+
+      // Start of: Rules - Syarat Wisuda
+
+      const rule1_wisuda = ["syarat", "wisuda"]
+
+      let rule1_wisuda_isValid = rule1_wisuda.every(el => msg.message.includes(el))
+
+      // End of: Rules - Syarat Wisuda
+
+      // Start of: Rules - Isi_CD_Proyek_Akhir
+
+      const ketentuanCd = ["tentu", "cd"]
+      const isiCd = ["isi", "cd"]
+
+      let ketentuanCdValid = ketentuanCd.every(element => msg.message.includes(element))
+      let isiCdValid = isiCd.every(element => msg.message.includes(element))
+
+      // End of: Rules - Isi_CD_Proyek_Akhir
+
+      // Start of: Rules - Koleksi Jurnal
+
+      const rule1_koleksi_jurnal = ["koleksi", "jurnal"]
+
+      let rule1_koleksi_jurnal_isValid = rule1_koleksi_jurnal.every(element => msg.message.includes(element))
+
+      // End of: Rules - Koleksi Jurnal
+
+      // Start of: Rules - Koleksi Ebook
+
+      const rule1_koleksi_ebook = ["koleksi", "ebook"]
+
+      let rule1_koleksi_ebook_isValid = rule1_koleksi_ebook.every(element => msg.message.includes(element))
+
+      // End of: Rules - Koleksi Ebook
 
 
       if(rule1_SP_isValid || rule2_SP_isValid || rule3_SP_isValid) {
@@ -569,8 +714,36 @@ class Chatbox {
           return "informasi_jam_layanan"
       } else if (msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("loker") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
             return "peraturan_pengunjung"
-      } else if (rule1_dikembalikan_orang_lain_isValid || msg.message.includes("kembali")) {
+      } else if (rule1_dikembalikan_orang_lain_isValid ) {
           return "dikembalikan_orang_lain"
+      } else if(msg.message.includes("mou")) {
+          return "mou"
+      } else if (msg.message.includes("struktur")) {
+          return "struktur_keanggotaan"
+      } else if (msg.message.includes("akreditasi") || msg.message.includes("sertifikat")) {
+          return "sertifikat_akreditasi"
+      } else if(bebasPinjamD3Valid || bebasPinjamD4Valid || bebasPinjamS2D3Valid || bebasPinjamS2D4Valid) {
+          return "bebas_pinjam"
+      } else if(rule1_wisuda_isValid) {
+          return "syarat_wisuda"
+      } else if (msg.message.includes("kaset") || msg.message.includes("cd") || msg.message.includes("dvd") || ketentuanCdValid || isiCdValid) {
+            return "Isi_CD_Proyek_Akhir"
+      } else if (msg.message.includes("qr") || msg.message.includes("qrcode") || msg.message.includes("code") || msg.message.includes("kode") || msg.message.includes("kesah")) {
+          return "qrcode_pengesahan"
+      } else if(msg.message.includes("visi")) {
+          return "visi"
+      }else if(msg.message.includes("misi")) {
+          return "misi"
+      }else if(rule1_koleksi_jurnal_isValid || msg.message.includes("jurnal")) {
+          return "koleksi_jurnal"
+      }else if(rule1_koleksi_ebook_isValid || msg.message.includes("ebook")) {
+          return "koleksi_ebook"
+      } else if(msg.message.includes("pinjam")){
+          return "pinjam_confirm"
+      }else if(msg.message.includes("kembali")){
+          return "kembali_confirm"
+      }else if(msg.message.includes("syarat")){
+          return "syarat_confirm"
       }
 
 
