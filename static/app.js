@@ -28,6 +28,12 @@ class Chatbox {
     });
   }
 
+  formatOutput(inputString) {
+      let formatEnter = inputString.replace(/\n/g, "<br>");
+      let formatLink = formatEnter.replace( /\\link(.*?)\\link/g, '<a href="$1" target="_blank">$1</a>')
+      return formatLink;
+  }
+
   toggleState(chatbox) {
     this.state = !this.state;
 
@@ -111,7 +117,7 @@ class Chatbox {
             if(this.subtopicState === "syarat_peminjaman") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/syarat-peminjaman")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
@@ -119,7 +125,7 @@ class Chatbox {
             } else if(this.subtopicState === "langkah_peminjaman") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/langkah-peminjaman")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
@@ -127,161 +133,161 @@ class Chatbox {
             } else if(this.subtopicState === "langkah_pengembalian") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/langkah-pengembalian")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "kondisi_rusak") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/kondisi-rusak")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "kondisi_hilang") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/kondisi-hilang-1")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "kondisi_hilang2") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/kondisi-hilang-2")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "maksimal_pinjam") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/maksimal-pinjam")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "denda") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/denda")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "informasi_jam_layanan") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/informasi-jam-layanan")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "peraturan_pengunjung") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/peraturan-pengunjung")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "dikembalikan_orang_lain") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/dikembalikan-orang-lain")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "mou") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/mou")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "struktur_keanggotaan") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/struktur-keanggotaan")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "sertifikat_akreditasi") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/sertifikat-akreditasi")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "bebas_pinjam") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/bebas-pinjam")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             } else if(this.subtopicState === "syarat_wisuda") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/syarat-wisuda")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "Isi_CD_Proyek_Akhir") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/cd-proyek-akhir")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "qrcode_pengesahan") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/qrcode-pengesahan")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "visi") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/visi")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "misi") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/misi")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "koleksi_jurnal") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/koleksi-jurnal")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "koleksi_ebook") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/koleksi-ebook")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "pinjam_confirm") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/pinjam-confirm")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "kembali_confirm") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/kembali-confirm")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
             }else if(this.subtopicState === "syarat_confirm") {
                 const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/syarat-confirm")
                 const response = await ansLangkah.json();
-                msg2 = {name: "Bot", message: response.answer}
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
