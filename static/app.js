@@ -646,8 +646,10 @@ class Chatbox {
       // Start of: Rules - Aturan dikembalikan orang lain
 
       const rule1_dikembalikan_orang_lain = ["kembali", "teman"]
+      const rule2_dikembalikan_orang_lain = ["kembali", "orang"]
 
       let rule1_dikembalikan_orang_lain_isValid = rule1_dikembalikan_orang_lain.every(el => msg.message.includes(el))
+      let rule2_dikembalikan_orang_lain_isValid = rule2_dikembalikan_orang_lain.every(el => msg.message.includes(el))
 
       // End of: Rules - Aturan dikembalikan orang lain
 
@@ -720,7 +722,7 @@ class Chatbox {
           return "informasi_jam_layanan"
       } else if (msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("loker") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
             return "peraturan_pengunjung"
-      } else if (rule1_dikembalikan_orang_lain_isValid ) {
+      } else if (rule1_dikembalikan_orang_lain_isValid || rule2_dikembalikan_orang_lain_isValid ) {
           return "dikembalikan_orang_lain"
       } else if(msg.message.includes("mou")) {
           return "mou"
