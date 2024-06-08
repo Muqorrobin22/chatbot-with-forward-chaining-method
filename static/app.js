@@ -298,6 +298,20 @@ class Chatbox {
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
+            }else if(this.subtopicState === "koleksi_perpus") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/koleksi_perpus")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "struktur_organisasi") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/struktur_organisasi")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
             }
 
             else {
@@ -716,6 +730,38 @@ class Chatbox {
 
       // End of: Rules - Keanggotaan
 
+      // Start of: Rules - Koleksi Perpustakaan
+
+      const rule1_koleksi_perpus = ["koleksi", "pustaka"]
+      const rule2_koleksi_perpus = ["koleksi"]
+
+      let rule1_koleksi_perpus_isValid = rule1_koleksi_perpus.every(element => msg.message.includes(element))
+      let rule2_koleksi_perpus_isValid = rule2_koleksi_perpus.every(element => msg.message.includes(element))
+
+      // End of: Rules - Koleksi Perpustakaan
+
+      // Start of: Rules - Struktur Organisasi
+
+      const rule1_struktur_organisasi = ["struktur", "organisasi"]
+      const rule2_struktur_organisasi = ["organisasi"]
+      const rule3_struktur_organisasi = ["bentuk", "organisasi"]
+      const rule4_struktur_organisasi = ["sistem", "organisasi"]
+
+      let rule1_struktur_organisasi_isValid = rule1_struktur_organisasi.every(element => msg.message.includes(element))
+      let rule2_struktur_organisasi_isValid = rule2_struktur_organisasi.every(element => msg.message.includes(element))
+      let rule3_struktur_organisasi_isValid = rule3_struktur_organisasi.every(element => msg.message.includes(element))
+      let rule4_struktur_organisasi_isValid = rule4_struktur_organisasi.every(element => msg.message.includes(element))
+
+      // End of: Rules - Struktur Organisasi
+
+      // Start of: Rules - Struktur Anggota
+
+      const rule1_struktur_anggota = ["struktur", "anggota"]
+
+      let rule1_struktur_anggota_isValid = rule1_struktur_anggota.every(element => msg.message.includes(element))
+
+      // End of: Rules - Struktur Amggota
+
 
       if(rule1_SP_isValid || rule2_SP_isValid || rule3_SP_isValid) {
           return "syarat_peminjaman"
@@ -741,7 +787,7 @@ class Chatbox {
           return "dikembalikan_orang_lain"
       } else if(msg.message.includes("mou")) {
           return "mou"
-      } else if (msg.message.includes("struktur")) {
+      } else if (rule1_struktur_anggota_isValid) {
           return "struktur_keanggotaan"
       } else if (msg.message.includes("akreditasi") || msg.message.includes("sertifikat")) {
           return "sertifikat_akreditasi"
@@ -769,6 +815,10 @@ class Chatbox {
           return "syarat_confirm"
       }else if(rule1_keanggotaan_isValid) {
           return "keanggotaan"
+      }else if(rule1_koleksi_perpus_isValid || rule2_koleksi_perpus_isValid) {
+          return "koleksi_perpus"
+      }else if(rule1_struktur_organisasi_isValid || rule2_struktur_organisasi_isValid || rule3_struktur_organisasi_isValid || rule4_struktur_organisasi_isValid) {
+          return "struktur_organisasi"
       }
 
 

@@ -529,6 +529,22 @@ def rule_keanggotaan():
     return jsonify(message)
 
 
+@app.get("/rule-based/koleksi_perpus")
+def rule_koleksi_perpus():
+    resp = """Koleksi buku Perpustakaan PENS meliputi buku cetak, modul ajar, ebook, jurnal dan tugas akhir D3, D4, dan Thesis
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/struktur_organisasi")
+def rule_struktur_organisasi():
+    resp = """Struktur Organisasi Perpustakaan PENS dapat dilihat pada link berikut \linkhttps://perpustakaan.pens.ac.id/struktur-keanggotaan/\link
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
 # End of: Changed Version - Rule Based
 
 if __name__ == "__main__":
