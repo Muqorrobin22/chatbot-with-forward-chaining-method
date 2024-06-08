@@ -312,6 +312,27 @@ class Chatbox {
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
+            }else if(this.subtopicState === "koleksi_buku") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/koleksi_buku")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "layanan_loker") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/layanan_loker")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "layanan_referensi") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/layanan_referensi")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
             }
 
             else {
@@ -733,10 +754,10 @@ class Chatbox {
       // Start of: Rules - Koleksi Perpustakaan
 
       const rule1_koleksi_perpus = ["koleksi", "pustaka"]
-      const rule2_koleksi_perpus = ["koleksi"]
+      // const rule2_koleksi_perpus = ["koleksi"]
 
       let rule1_koleksi_perpus_isValid = rule1_koleksi_perpus.every(element => msg.message.includes(element))
-      let rule2_koleksi_perpus_isValid = rule2_koleksi_perpus.every(element => msg.message.includes(element))
+      // let rule2_koleksi_perpus_isValid = rule2_koleksi_perpus.every(element => msg.message.includes(element))
 
       // End of: Rules - Koleksi Perpustakaan
 
@@ -762,6 +783,46 @@ class Chatbox {
 
       // End of: Rules - Struktur Amggota
 
+      // Start of: Rules - Koleksi Buku
+
+      const rule1_koleksi_buku = ["koleksi", "buku"]
+      const rule2_koleksi_buku = ["cara", "koleksi", "lihat"]
+      const rule3_koleksi_buku = ["lihat", "koleksi", "buku"]
+      const rule4_koleksi_buku = ["sedia", "buku"]
+      const rule5_koleksi_buku = ["cara", "koleksi"]
+      const rule6_koleksi_buku = ["cara", "buku"]
+      // const rule7_koleksi_buku = ["layan", "koleksi"]
+
+      let rule1_koleksi_buku_isValid = rule1_koleksi_buku.every(element => msg.message.includes(element))
+      let rule2_koleksi_buku_isValid = rule2_koleksi_buku.every(element => msg.message.includes(element))
+      let rule3_koleksi_buku_isValid = rule3_koleksi_buku.every(element => msg.message.includes(element))
+      let rule4_koleksi_buku_isValid = rule4_koleksi_buku.every(element => msg.message.includes(element))
+      let rule5_koleksi_buku_isValid = rule5_koleksi_buku.every(element => msg.message.includes(element))
+      let rule6_koleksi_buku_isValid = rule6_koleksi_buku.every(element => msg.message.includes(element))
+      // let rule7_koleksi_buku_isValid = rule7_koleksi_buku.every(element => msg.message.includes(element))
+
+      // End of: Rules - Koleksi Buku
+
+      // Start of: Rules - Layanan Loker
+
+      const rule1_layanan_loker = ["layan", "loker"]
+      const rule2_layanan_loker = ["loker"]
+
+      let rule1_layanan_loker_isValid = rule1_layanan_loker.every(element => msg.message.includes(element))
+      let rule2_layanan_loker_isValid = rule2_layanan_loker.every(element => msg.message.includes(element))
+
+      // End of: Rules - Layanan Loker
+
+      // Start of: Rules - Layanan Referensi
+
+      const rule1_layanan_referensi = ["layan", "referensi"]
+      const rule2_layanan_referensi = ["layan", "koleksi", "referensi"]
+
+      let rule1_layanan_referensi_isValid = rule1_layanan_referensi.every(element => msg.message.includes(element))
+      let rule2_layanan_referensi_isValid = rule2_layanan_referensi.every(element => msg.message.includes(element))
+
+      // End of: Rules - Layanan Referensi
+
 
       if(rule1_SP_isValid || rule2_SP_isValid || rule3_SP_isValid) {
           return "syarat_peminjaman"
@@ -781,7 +842,7 @@ class Chatbox {
           return "denda"
       }else if(msg.message.includes("jam") || msg.message.includes("buka") || msg.message.includes("tutup")) {
           return "informasi_jam_layanan"
-      } else if (msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("loker") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
+      } else if (msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
             return "peraturan_pengunjung"
       } else if (rule1_dikembalikan_orang_lain_isValid || rule2_dikembalikan_orang_lain_isValid ) {
           return "dikembalikan_orang_lain"
@@ -815,10 +876,16 @@ class Chatbox {
           return "syarat_confirm"
       }else if(rule1_keanggotaan_isValid) {
           return "keanggotaan"
-      }else if(rule1_koleksi_perpus_isValid || rule2_koleksi_perpus_isValid) {
+      }else if(rule1_koleksi_perpus_isValid ) {
           return "koleksi_perpus"
       }else if(rule1_struktur_organisasi_isValid || rule2_struktur_organisasi_isValid || rule3_struktur_organisasi_isValid || rule4_struktur_organisasi_isValid) {
           return "struktur_organisasi"
+      }else if(rule1_koleksi_buku_isValid || rule2_koleksi_buku_isValid || rule3_koleksi_buku_isValid || rule4_koleksi_buku_isValid || rule5_koleksi_buku_isValid || rule6_koleksi_buku_isValid ) {
+          return "koleksi_buku"
+      }else if(rule1_layanan_loker_isValid || rule2_layanan_loker_isValid ) {
+          return "layanan_loker"
+      }else if(rule1_layanan_referensi_isValid || rule2_layanan_referensi_isValid ) {
+          return "layanan_referensi"
       }
 
 

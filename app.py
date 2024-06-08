@@ -545,6 +545,38 @@ def rule_struktur_organisasi():
     return jsonify(message)
 
 
+@app.get("/rule-based/koleksi_buku")
+def rule_koleksi_buku():
+    resp = """Anda dapat melihat koleksi buku perpustakaan dengan cara:\n
+
+1. Sambungkan koneksi Anda dengan wifi eepiswlan.
+2. Buka link berikut: \linkhttps://mis.pens.ac.id/\link
+3. Pilih menu Lain-lain dan kemudian pilih Perpustakaan.
+4. Klik logo PENS dan cari buku yang Anda inginkan di kolom pencarian.\n
+
+Dengan langkah-langkah ini, Anda dapat mengakses koleksi buku yang tersedia di perpustakaan.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+
+@app.get("/rule-based/layanan_loker")
+def rule_layanan_loker():
+    resp = """Layanan loker UPT Perpustakaan Politeknik Elektronika Negeri Surabaya yang disediakan bagi para pengguna untuk menyimpan barang – barang seperti tas, jaket, buku, serta berbagai barang bawaan yang layak untuk disimpan di lemari loker.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/layanan_referensi")
+def rule_referensi():
+    resp = """Layanan Koleksi Referensi terdiri dari Kamus, Ensiklopedia, Handbook, Abstraks, Manual Book, dan Laporan Tahunan. Layanan referensi di UPT Perpustakaan Politeknik Elektronika Negeri Surabaya menggunakan open access atau sistem layanan terbuka, dimana setiap pengguna dapat mengambil sendiri koleksi referensi secara langsung dari rak. 
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
 # End of: Changed Version - Rule Based
 
 if __name__ == "__main__":
