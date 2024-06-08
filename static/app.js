@@ -291,6 +291,13 @@ class Chatbox {
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
+            }else if(this.subtopicState === "keanggotaan") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/keanggotaan")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
             }
 
             else {
@@ -701,6 +708,14 @@ class Chatbox {
 
       // End of: Rules - Koleksi Ebook
 
+      // Start of: Rules - Keanggotaan
+
+      const rule1_keanggotaan = ["anggota"]
+
+      let rule1_keanggotaan_isValid = rule1_keanggotaan.every(element => msg.message.includes(element))
+
+      // End of: Rules - Keanggotaan
+
 
       if(rule1_SP_isValid || rule2_SP_isValid || rule3_SP_isValid) {
           return "syarat_peminjaman"
@@ -752,6 +767,8 @@ class Chatbox {
           return "kembali_confirm"
       }else if(msg.message.includes("syarat")){
           return "syarat_confirm"
+      }else if(rule1_keanggotaan_isValid) {
+          return "keanggotaan"
       }
 
 

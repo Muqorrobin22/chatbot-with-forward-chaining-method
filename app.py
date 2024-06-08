@@ -519,7 +519,14 @@ def rule_syarat_confirm():
     message = {"answer": resp};
     return jsonify(message)
 
-
+@app.get("/rule-based/keanggotaan")
+def rule_keanggotaan():
+    resp = """Keanggotaan perpustakaan terbuka bagi sivitas Politeknik Elektronika Negeri Surabaya. Aktivasi keanggotaan dapat dilakukan dengan menunjukkan:\n
+1. Smart Card / Kartu Mahasiswa (KTM) PENS
+2. Kartu Pegawai PENS
+"""
+    message = {"answer": resp};
+    return jsonify(message)
 
 
 # End of: Changed Version - Rule Based
