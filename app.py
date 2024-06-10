@@ -577,6 +577,43 @@ def rule_referensi():
     return jsonify(message)
 
 
+@app.get("/rule-based/koleksi_modul")
+def rule_koleksi_module_ajar():
+    resp = """Data judul koleksi modul ajar sudah tersedia di komputer Online Public Access Catalogue (OPAC) perpustakaan dengan mengakses \linkhttps://mis.eepis-its.edu/\link guna untuk memudahkan pencarian modul ajar dengan cepat dan tepat. Selanjutnya ketua kelas beserta perwakilan teman kelas berkunjung ke Perpustakaan untuk melakukan proses peminjaman modul ajar.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/mencari_buku")
+def rule_mencari_buku():
+    resp = """Berikut langkah-langkah untuk mencari buku di rak:\n
+
+1. Buka: \linkhttps://mis.pens.ac.id\link, kemudian klik Perpustakaan.
+2. Klik logo PENS, kemudian klik Collection dan pilih jenis koleksi.
+3. Ketik kata kunci buku yang dibutuhkan, kemudian catat lokasinya. Misalnya, D4/TAK/3396/2017, yang artinya:\n
+ -D4: Koleksi perpustakaan D4
+ -TAK: Tugas Akhir Jurusan Komputer
+ -3396: Nomor Induk TA
+ -2017: Tahun Wisuda
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/pengadaan_buku")
+def rule_pengadaan_buku():
+    resp = """Berikut cara pengadaan buku perpustakaan PENS:\n
+
+1. Buka \linkhttps://mis.pens.ac.id\link, kemudian klik Unit dan pilih Perpustakaan.
+2. Klik Pemesanan Buku Baru.
+3. Klik Tambah.
+4. Isi detail buku yang ingin dipesan, lalu klik Simpan.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
 # End of: Changed Version - Rule Based
 
 if __name__ == "__main__":

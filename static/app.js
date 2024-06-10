@@ -333,6 +333,27 @@ class Chatbox {
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
+            }else if(this.subtopicState === "koleksi_modul") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/koleksi_modul")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "mencari_buku") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/mencari_buku")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "pengadaan_buku") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/pengadaan_buku")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
             }
 
             else {
@@ -823,6 +844,51 @@ class Chatbox {
 
       // End of: Rules - Layanan Referensi
 
+      // Start of: Rules - Koleksi Modul Ajar
+
+      const rule1_modul_ajar = ["koleksi", "modul"]
+      const rule2_modul_ajar = ["koleksi", "ajar"]
+      const rule3_modul_ajar = ["modul", "ajar"]
+      const rule4_modul_ajar = ["modul"]
+      const rule5_modul_ajar = ["ajar"]
+
+      let rule1_modul_ajar_isValid = rule1_modul_ajar.every(element => msg.message.includes(element))
+      let rule2_modul_ajar_isValid = rule2_modul_ajar.every(element => msg.message.includes(element))
+      let rule3_modul_ajar_isValid = rule3_modul_ajar.every(element => msg.message.includes(element))
+      let rule4_modul_ajar_isValid = rule4_modul_ajar.every(element => msg.message.includes(element))
+      let rule5_modul_ajar_isValid = rule5_modul_ajar.every(element => msg.message.includes(element))
+
+      // End of: Rules - Koleksi Modul Ajar
+
+
+      // Start of: Rules - Mencari buku
+
+      const rule1_mencari_buku = ["cara", "cari", "buku"]
+      const rule2_mencari_buku = [ "cari", "koleksi"]
+      const rule3_mencari_buku = [ "cara", "cari", "koleksi"]
+      const rule4_mencari_buku = [ "cari", "buku"]
+
+      let rule1_mencari_buku_isValid = rule1_mencari_buku.every(element => msg.message.includes(element))
+      let rule2_mencari_buku_isValid = rule2_mencari_buku.every(element => msg.message.includes(element))
+      let rule3_mencari_buku_isValid = rule3_mencari_buku.every(element => msg.message.includes(element))
+      let rule4_mencari_buku_isValid = rule4_mencari_buku.every(element => msg.message.includes(element))
+
+      // End of: Rules - Mencari Buku
+
+      // Start of: Rules - Pengadaan buku
+
+      const rule1_pengadaan_buku = ["cara", "ada", "buku"]
+      const rule2_pengadaan_buku = ["cara", "aju", "buku"]
+      const rule3_pengadaan_buku = ["aju", "buku"]
+      const rule4_pengadaan_buku = ["ada", "buku"]
+
+      let rule1_pengadaan_buku_isValid = rule1_pengadaan_buku.every(element => msg.message.includes(element))
+      let rule2_pengadaan_buku_isValid = rule2_pengadaan_buku.every(element => msg.message.includes(element))
+      let rule3_pengadaan_buku_isValid = rule3_pengadaan_buku.every(element => msg.message.includes(element))
+      let rule4_pengadaan_buku_isValid = rule4_pengadaan_buku.every(element => msg.message.includes(element))
+
+      // End of: Rules - Pengadaan buku
+
 
       if(rule1_SP_isValid || rule2_SP_isValid || rule3_SP_isValid) {
           return "syarat_peminjaman"
@@ -886,6 +952,12 @@ class Chatbox {
           return "layanan_loker"
       }else if(rule1_layanan_referensi_isValid || rule2_layanan_referensi_isValid ) {
           return "layanan_referensi"
+      }else if(rule1_modul_ajar_isValid || rule2_modul_ajar_isValid || rule3_modul_ajar_isValid || rule4_modul_ajar_isValid || rule5_modul_ajar_isValid ) {
+          return "koleksi_modul"
+      }else if(rule1_mencari_buku_isValid || rule3_mencari_buku_isValid || rule2_mencari_buku_isValid || rule4_mencari_buku_isValid ) {
+          return "mencari_buku"
+      }else if(rule1_pengadaan_buku_isValid || rule2_pengadaan_buku_isValid || rule3_pengadaan_buku_isValid || rule4_pengadaan_buku_isValid) {
+          return "pengadaan_buku"
       }
 
 
