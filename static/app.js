@@ -354,6 +354,20 @@ class Chatbox {
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
+            }else if(this.subtopicState === "tata_tertib") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/tata_tertib")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "npp_perpustakaan") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/npp_perpustakaan")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
             }
 
             else {
@@ -889,6 +903,26 @@ class Chatbox {
 
       // End of: Rules - Pengadaan buku
 
+      // Start of: Rules - tata tertib
+
+      const rule1_tata_tertib = ["tata", "tertib"]
+      const rule2_tata_tertib = ["atur", "pustaka"]
+
+      let rule1_tata_tertib_isValid = rule1_tata_tertib.every(element => msg.message.includes(element))
+      let rule2_tata_tertib_isValid = rule2_tata_tertib.every(element => msg.message.includes(element))
+
+      // End of: Rules - tata tertib
+
+      // Start of: Rules - NPP Perpustakaan
+
+      const rule1_npp_perpustakaan = ["npp", "pustaka"]
+      const rule2_npp_perpustakaan = ["npp"]
+
+      let rule1_npp_perpustakaan_isValid = rule1_npp_perpustakaan.every(element => msg.message.includes(element))
+      let rule2_npp_perpustakaan_isValid = rule2_npp_perpustakaan.every(element => msg.message.includes(element))
+
+      // End of: Rules - NPP Perpustakaan
+
 
       if(rule1_SP_isValid || rule2_SP_isValid || rule3_SP_isValid) {
           return "syarat_peminjaman"
@@ -958,6 +992,10 @@ class Chatbox {
           return "pengadaan_buku"
       }else if(rule1_koleksi_buku_isValid || rule2_koleksi_buku_isValid || rule3_koleksi_buku_isValid || rule4_koleksi_buku_isValid || rule5_koleksi_buku_isValid || rule6_koleksi_buku_isValid ) {
           return "koleksi_buku"
+      }else if(rule1_tata_tertib_isValid || rule2_tata_tertib_isValid) {
+          return "tata_tertib"
+      }else if(rule1_npp_perpustakaan_isValid || rule2_npp_perpustakaan_isValid) {
+          return "npp_perpustakaan"
       }
 
 

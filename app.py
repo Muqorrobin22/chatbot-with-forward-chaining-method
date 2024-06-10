@@ -614,6 +614,22 @@ def rule_pengadaan_buku():
     return jsonify(message)
 
 
+@app.get("/rule-based/tata_tertib")
+def rule_tata_tertib():
+    resp = """Tata tertib perpustakaan PENS dapat dilihat di link berikut : \linkhttps://perpustakaan.pens.ac.id/tentang-kami/\link
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/npp_perpustakaan")
+def rule_npp_perpustakaan():
+    resp = """NPP Perpustakaann PENS : 3578082C0200001
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
 # End of: Changed Version - Rule Based
 
 if __name__ == "__main__":
