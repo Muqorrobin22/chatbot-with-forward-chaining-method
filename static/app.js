@@ -942,8 +942,6 @@ class Chatbox {
           return "denda"
       }else if(msg.message.includes("jam") || msg.message.includes("buka") || msg.message.includes("tutup")) {
           return "informasi_jam_layanan"
-      } else if (msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
-            return "peraturan_pengunjung"
       } else if (rule1_dikembalikan_orang_lain_isValid || rule2_dikembalikan_orang_lain_isValid ) {
           return "dikembalikan_orang_lain"
       } else if(msg.message.includes("mou")) {
@@ -996,6 +994,8 @@ class Chatbox {
           return "tata_tertib"
       }else if(rule1_npp_perpustakaan_isValid || rule2_npp_perpustakaan_isValid) {
           return "npp_perpustakaan"
+      } else if (msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
+          return "peraturan_pengunjung"
       }
 
 
