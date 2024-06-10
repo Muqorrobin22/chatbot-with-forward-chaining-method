@@ -946,8 +946,6 @@ class Chatbox {
           return "koleksi_perpus"
       }else if(rule1_struktur_organisasi_isValid || rule2_struktur_organisasi_isValid || rule3_struktur_organisasi_isValid || rule4_struktur_organisasi_isValid) {
           return "struktur_organisasi"
-      }else if(rule1_koleksi_buku_isValid || rule2_koleksi_buku_isValid || rule3_koleksi_buku_isValid || rule4_koleksi_buku_isValid || rule5_koleksi_buku_isValid || rule6_koleksi_buku_isValid ) {
-          return "koleksi_buku"
       }else if(rule1_layanan_loker_isValid || rule2_layanan_loker_isValid ) {
           return "layanan_loker"
       }else if(rule1_layanan_referensi_isValid || rule2_layanan_referensi_isValid ) {
@@ -958,6 +956,8 @@ class Chatbox {
           return "mencari_buku"
       }else if(rule1_pengadaan_buku_isValid || rule2_pengadaan_buku_isValid || rule3_pengadaan_buku_isValid || rule4_pengadaan_buku_isValid) {
           return "pengadaan_buku"
+      }else if(rule1_koleksi_buku_isValid || rule2_koleksi_buku_isValid || rule3_koleksi_buku_isValid || rule4_koleksi_buku_isValid || rule5_koleksi_buku_isValid || rule6_koleksi_buku_isValid ) {
+          return "koleksi_buku"
       }
 
 
