@@ -291,6 +291,83 @@ class Chatbox {
                 this.messages.push(msg2);
                 this.updateChatText(chatbox);
                 textField.value = "";
+            }else if(this.subtopicState === "keanggotaan") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/keanggotaan")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "koleksi_perpus") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/koleksi_perpus")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "struktur_organisasi") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/struktur_organisasi")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "koleksi_buku") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/koleksi_buku")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "layanan_loker") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/layanan_loker")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "layanan_referensi") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/layanan_referensi")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "koleksi_modul") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/koleksi_modul")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "mencari_buku") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/mencari_buku")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "pengadaan_buku") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/pengadaan_buku")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "tata_tertib") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/tata_tertib")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
+            }else if(this.subtopicState === "npp_perpustakaan") {
+                const ansLangkah = await fetch("http://127.0.0.1:5000/rule-based/npp_perpustakaan")
+                const response = await ansLangkah.json();
+                msg2 = {name: "Bot", message: this.formatOutput(response.answer)}
+                this.messages.push(msg2);
+                this.updateChatText(chatbox);
+                textField.value = "";
             }
 
             else {
@@ -505,60 +582,6 @@ class Chatbox {
     }
   }
 
-  detectTopic(text) {
-      const pengembalianBuku = ["kembali", "buku"]
-      const peminjamanBuku = ["pinjam", "buku"]
-      const informasiUmum = ["informasi", "umum"]
-      const informasiPerpustakaan = ["informasi", "pustaka"]
-      const kelengkapanBerkasWisuda = ["lengkap", "berkas", "wisuda"]
-      const berkasWisuda = ["berkas", "wisuda"]
-      const visiDanMisi = ["visi", "misi"]
-      const koleksi = ["koleksi"]
-
-      let pengembalianBukuValid = pengembalianBuku.every(element => text.message.includes(element));
-      let peminjamanBukuValid = peminjamanBuku.every(element => text.message.includes(element));
-      let informasiPerpustakaanValid = informasiPerpustakaan.every(element => text.message.includes(element));
-      let informasiUmumValid = informasiUmum.every(element => text.message.includes(element))
-      let kelengkapanBerkasWisudaValid = kelengkapanBerkasWisuda.every(element => text.message.includes(element))
-      let berkasWisudaValid = berkasWisuda.every(element => text.message.includes(element))
-      let visiDanMisiValid = visiDanMisi.every(element => text.message.includes(element))
-      let koleksiValid = koleksi.every(el => text.message.includes(el))
-
-      if(pengembalianBukuValid) {
-          return "pengembalian"
-      } else if (peminjamanBukuValid) {
-          return "peminjaman"
-      } else if(informasiPerpustakaanValid || informasiUmumValid) {
-          return "informasi_umum"
-      } else if(kelengkapanBerkasWisudaValid || berkasWisudaValid) {
-          return "berkas_wisuda"
-      } else if(visiDanMisiValid) {
-          return "visi_misi"
-      } else if(koleksiValid) {
-          return "koleksi"
-      }
-  }
-
-  detectSubTopicPengembalian(msg) {
-      // const langkahPengembalian = ["langkah", "cara", "tutorial", "tutor"]
-      // const kondisiPengembalian = ["rusak", "kondisi", "hilang"]
-      // const dendaPengembalian = ["denda"]
-      // const maksimalPengembalian = ["batas", "masa", "maksimal", "panjang", "lama"]
-
-      // let langkahPengembalianBuku = langkahPengembalian.every(element => msg.message.includes(element));
-      // let kondisiPengembalianBuku = kondisiPengembalian.every(element => msg.message.includes(element));
-
-      if(msg.message.includes("langkah") || msg.message.includes("cara") || msg.message.includes("tutorial") || msg.message.includes("tutor")) {
-          return "langkah"
-      } else if(msg.message.includes("kondisi") || msg.message.includes("rusak") || msg.message.includes("hilang")) {
-          return "kondisi"
-      } else if(msg.message.includes("denda") || msg.message.includes("tentu")) {
-          return "denda"
-      } else if (msg.message.includes("batas") || msg.message.includes("masa") || msg.message.includes("maksimal") || msg.message.includes("panjang") || msg.message.includes("lama")) {
-        return "maksimal"
-      }
-  }
-
   ruleBaseDetect(msg) {
 
       // Start of: Rules - Syarat Peminjaman
@@ -701,6 +724,151 @@ class Chatbox {
 
       // End of: Rules - Koleksi Ebook
 
+      // Start of: Rules - Keanggotaan
+
+      const rule1_keanggotaan = ["anggota"]
+
+      let rule1_keanggotaan_isValid = rule1_keanggotaan.every(element => msg.message.includes(element))
+
+      // End of: Rules - Keanggotaan
+
+      // Start of: Rules - Koleksi Perpustakaan
+
+      const rule1_koleksi_perpus = ["koleksi", "pustaka"]
+      // const rule2_koleksi_perpus = ["koleksi"]
+
+      let rule1_koleksi_perpus_isValid = rule1_koleksi_perpus.every(element => msg.message.includes(element))
+      // let rule2_koleksi_perpus_isValid = rule2_koleksi_perpus.every(element => msg.message.includes(element))
+
+      // End of: Rules - Koleksi Perpustakaan
+
+      // Start of: Rules - Struktur Organisasi
+
+      const rule1_struktur_organisasi = ["struktur", "organisasi"]
+      const rule2_struktur_organisasi = ["organisasi"]
+      const rule3_struktur_organisasi = ["bentuk", "organisasi"]
+      const rule4_struktur_organisasi = ["sistem", "organisasi"]
+
+      let rule1_struktur_organisasi_isValid = rule1_struktur_organisasi.every(element => msg.message.includes(element))
+      let rule2_struktur_organisasi_isValid = rule2_struktur_organisasi.every(element => msg.message.includes(element))
+      let rule3_struktur_organisasi_isValid = rule3_struktur_organisasi.every(element => msg.message.includes(element))
+      let rule4_struktur_organisasi_isValid = rule4_struktur_organisasi.every(element => msg.message.includes(element))
+
+      // End of: Rules - Struktur Organisasi
+
+      // Start of: Rules - Struktur Anggota
+
+      const rule1_struktur_anggota = ["struktur", "anggota"]
+
+      let rule1_struktur_anggota_isValid = rule1_struktur_anggota.every(element => msg.message.includes(element))
+
+      // End of: Rules - Struktur Amggota
+
+      // Start of: Rules - Koleksi Buku
+
+      const rule1_koleksi_buku = ["koleksi", "buku"]
+      const rule2_koleksi_buku = ["cara", "koleksi", "lihat"]
+      const rule3_koleksi_buku = ["lihat", "koleksi", "buku"]
+      const rule4_koleksi_buku = ["sedia", "buku"]
+      const rule5_koleksi_buku = ["cara", "koleksi"]
+      const rule6_koleksi_buku = ["cara", "buku"]
+      // const rule7_koleksi_buku = ["layan", "koleksi"]
+
+      let rule1_koleksi_buku_isValid = rule1_koleksi_buku.every(element => msg.message.includes(element))
+      let rule2_koleksi_buku_isValid = rule2_koleksi_buku.every(element => msg.message.includes(element))
+      let rule3_koleksi_buku_isValid = rule3_koleksi_buku.every(element => msg.message.includes(element))
+      let rule4_koleksi_buku_isValid = rule4_koleksi_buku.every(element => msg.message.includes(element))
+      let rule5_koleksi_buku_isValid = rule5_koleksi_buku.every(element => msg.message.includes(element))
+      let rule6_koleksi_buku_isValid = rule6_koleksi_buku.every(element => msg.message.includes(element))
+      // let rule7_koleksi_buku_isValid = rule7_koleksi_buku.every(element => msg.message.includes(element))
+
+      // End of: Rules - Koleksi Buku
+
+      // Start of: Rules - Layanan Loker
+
+      const rule1_layanan_loker = ["layan", "loker"]
+      const rule2_layanan_loker = ["loker"]
+
+      let rule1_layanan_loker_isValid = rule1_layanan_loker.every(element => msg.message.includes(element))
+      let rule2_layanan_loker_isValid = rule2_layanan_loker.every(element => msg.message.includes(element))
+
+      // End of: Rules - Layanan Loker
+
+      // Start of: Rules - Layanan Referensi
+
+      const rule1_layanan_referensi = ["layan", "referensi"]
+      const rule2_layanan_referensi = ["layan", "koleksi", "referensi"]
+
+      let rule1_layanan_referensi_isValid = rule1_layanan_referensi.every(element => msg.message.includes(element))
+      let rule2_layanan_referensi_isValid = rule2_layanan_referensi.every(element => msg.message.includes(element))
+
+      // End of: Rules - Layanan Referensi
+
+      // Start of: Rules - Koleksi Modul Ajar
+
+      const rule1_modul_ajar = ["koleksi", "modul"]
+      const rule2_modul_ajar = ["koleksi", "ajar"]
+      const rule3_modul_ajar = ["modul", "ajar"]
+      const rule4_modul_ajar = ["modul"]
+      const rule5_modul_ajar = ["ajar"]
+
+      let rule1_modul_ajar_isValid = rule1_modul_ajar.every(element => msg.message.includes(element))
+      let rule2_modul_ajar_isValid = rule2_modul_ajar.every(element => msg.message.includes(element))
+      let rule3_modul_ajar_isValid = rule3_modul_ajar.every(element => msg.message.includes(element))
+      let rule4_modul_ajar_isValid = rule4_modul_ajar.every(element => msg.message.includes(element))
+      let rule5_modul_ajar_isValid = rule5_modul_ajar.every(element => msg.message.includes(element))
+
+      // End of: Rules - Koleksi Modul Ajar
+
+
+      // Start of: Rules - Mencari buku
+
+      const rule1_mencari_buku = ["cara", "cari", "buku"]
+      const rule2_mencari_buku = [ "cari", "koleksi"]
+      const rule3_mencari_buku = [ "cara", "cari", "koleksi"]
+      const rule4_mencari_buku = [ "cari", "buku"]
+
+      let rule1_mencari_buku_isValid = rule1_mencari_buku.every(element => msg.message.includes(element))
+      let rule2_mencari_buku_isValid = rule2_mencari_buku.every(element => msg.message.includes(element))
+      let rule3_mencari_buku_isValid = rule3_mencari_buku.every(element => msg.message.includes(element))
+      let rule4_mencari_buku_isValid = rule4_mencari_buku.every(element => msg.message.includes(element))
+
+      // End of: Rules - Mencari Buku
+
+      // Start of: Rules - Pengadaan buku
+
+      const rule1_pengadaan_buku = ["cara", "ada", "buku"]
+      const rule2_pengadaan_buku = ["cara", "aju", "buku"]
+      const rule3_pengadaan_buku = ["aju", "buku"]
+      const rule4_pengadaan_buku = ["ada", "buku"]
+
+      let rule1_pengadaan_buku_isValid = rule1_pengadaan_buku.every(element => msg.message.includes(element))
+      let rule2_pengadaan_buku_isValid = rule2_pengadaan_buku.every(element => msg.message.includes(element))
+      let rule3_pengadaan_buku_isValid = rule3_pengadaan_buku.every(element => msg.message.includes(element))
+      let rule4_pengadaan_buku_isValid = rule4_pengadaan_buku.every(element => msg.message.includes(element))
+
+      // End of: Rules - Pengadaan buku
+
+      // Start of: Rules - tata tertib
+
+      const rule1_tata_tertib = ["tata", "tertib"]
+      const rule2_tata_tertib = ["atur", "pustaka"]
+
+      let rule1_tata_tertib_isValid = rule1_tata_tertib.every(element => msg.message.includes(element))
+      let rule2_tata_tertib_isValid = rule2_tata_tertib.every(element => msg.message.includes(element))
+
+      // End of: Rules - tata tertib
+
+      // Start of: Rules - NPP Perpustakaan
+
+      const rule1_npp_perpustakaan = ["npp", "pustaka"]
+      const rule2_npp_perpustakaan = ["npp"]
+
+      let rule1_npp_perpustakaan_isValid = rule1_npp_perpustakaan.every(element => msg.message.includes(element))
+      let rule2_npp_perpustakaan_isValid = rule2_npp_perpustakaan.every(element => msg.message.includes(element))
+
+      // End of: Rules - NPP Perpustakaan
+
 
       if(rule1_SP_isValid || rule2_SP_isValid || rule3_SP_isValid) {
           return "syarat_peminjaman"
@@ -720,13 +888,11 @@ class Chatbox {
           return "denda"
       }else if(msg.message.includes("jam") || msg.message.includes("buka") || msg.message.includes("tutup")) {
           return "informasi_jam_layanan"
-      } else if (msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("loker") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
-            return "peraturan_pengunjung"
       } else if (rule1_dikembalikan_orang_lain_isValid || rule2_dikembalikan_orang_lain_isValid ) {
           return "dikembalikan_orang_lain"
       } else if(msg.message.includes("mou")) {
           return "mou"
-      } else if (msg.message.includes("struktur")) {
+      } else if (rule1_struktur_anggota_isValid) {
           return "struktur_keanggotaan"
       } else if (msg.message.includes("akreditasi") || msg.message.includes("sertifikat")) {
           return "sertifikat_akreditasi"
@@ -752,119 +918,36 @@ class Chatbox {
           return "kembali_confirm"
       }else if(msg.message.includes("syarat")){
           return "syarat_confirm"
+      }else if(rule1_keanggotaan_isValid) {
+          return "keanggotaan"
+      }else if(rule1_koleksi_perpus_isValid ) {
+          return "koleksi_perpus"
+      }else if(rule1_struktur_organisasi_isValid || rule2_struktur_organisasi_isValid || rule3_struktur_organisasi_isValid || rule4_struktur_organisasi_isValid) {
+          return "struktur_organisasi"
+      }else if(rule1_layanan_loker_isValid || rule2_layanan_loker_isValid ) {
+          return "layanan_loker"
+      }else if(rule1_layanan_referensi_isValid || rule2_layanan_referensi_isValid ) {
+          return "layanan_referensi"
+      }else if(rule1_modul_ajar_isValid || rule2_modul_ajar_isValid || rule3_modul_ajar_isValid || rule4_modul_ajar_isValid || rule5_modul_ajar_isValid ) {
+          return "koleksi_modul"
+      }else if(rule1_mencari_buku_isValid || rule3_mencari_buku_isValid || rule2_mencari_buku_isValid || rule4_mencari_buku_isValid ) {
+          return "mencari_buku"
+      }else if(rule1_pengadaan_buku_isValid || rule2_pengadaan_buku_isValid || rule3_pengadaan_buku_isValid || rule4_pengadaan_buku_isValid) {
+          return "pengadaan_buku"
+      }else if(rule1_koleksi_buku_isValid || rule2_koleksi_buku_isValid || rule3_koleksi_buku_isValid || rule4_koleksi_buku_isValid || rule5_koleksi_buku_isValid || rule6_koleksi_buku_isValid ) {
+          return "koleksi_buku"
+      }else if(rule1_tata_tertib_isValid || rule2_tata_tertib_isValid) {
+          return "tata_tertib"
+      }else if(rule1_npp_perpustakaan_isValid || rule2_npp_perpustakaan_isValid) {
+          return "npp_perpustakaan"
+      } else if (msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
+          return "peraturan_pengunjung"
       }
 
 
 
   }
 
-  detectSubTopicPeminjaman(msg) {
-      // const maksimalPeminjaman = ["batas", "masa", "maksimal", "panjang", "lama"]
-      // const syaratPeminjaman = ["syarat", "butuh", "pinjam"]
-      // const langkahPeminjaman = ["langkah", "cara", "tutorial", "tutor"]
-
-
-      if(msg.message.includes("langkah") || msg.message.includes("cara") || msg.message.includes("tutorial") || msg.message.includes("tutor")) {
-          return "langkah"
-      } else if(msg.message.includes("syarat") || msg.message.includes("butuh")) {
-          return "syarat"
-      } else if (msg.message.includes("batas") || msg.message.includes("masa") || msg.message.includes("maksimal") || msg.message.includes("panjang") || msg.message.includes("lama")) {
-        return "maksimal"
-      }
-  }
-
-  detectSubTopicInformasiUmum(msg) {
-      // const jamLayanan = ["jam", "buka", "tutup"]
-      // const peraturanPengunjung = ["atur", 'wajib', 'tas', 'loker', 'jaket', 'makan', 'minum', 'presensi']
-      // const dikembalikanOrangLain = ["kembali", "orang"] || ["kembali", "teman"]
-      // const mou = ["mou"]
-      // const strukturKeanggotaan = ["struktur", "anggota"]
-      // const sertifikasiAkreditas = ["sertifikat", "akreditasi"]
-      // const bebasPinjam = ["d", "pus"] || ["d", "pustaka"] || ["s", "pustaka", "d"] || ["s", "pus", "d"]
-
-      const dikembalikanOrangLain = ["kembali", "orang"]
-      const dikembalikanTeman =  ["kembali", "teman"]
-      const dikembalikanPihak =  ["kembali", "pihak"]
-      let dikembalikanOrangLainValid = dikembalikanOrangLain.every(element => msg.message.includes(element))
-      let dikembalikanTemanValid = dikembalikanTeman.every(element => msg.message.includes(element))
-      let dikembalikanPihakValid = dikembalikanPihak.every(element => msg.message.includes(element))
-
-      // Bebas Pinjam
-      const bebasPinjamD3 = ["d", "pus"]
-      const bebasPinjamD4 = ["d", "pustaka"]
-      const bebasPinjamS2D3 = ["s", "pustaka", "d"]
-      const bebasPinjamS2D4 = ["s", "pus", "d"]
-
-      let bebasPinjamD3Valid = bebasPinjamD3.every(el => msg.message.includes(el))
-      let bebasPinjamD4Valid = bebasPinjamD4.every(el => msg.message.includes(el))
-      let bebasPinjamS2D3Valid = bebasPinjamS2D3.every(el => msg.message.includes(el))
-      let bebasPinjamS2D4Valid = bebasPinjamS2D4.every(el => msg.message.includes(el))
-
-      if(msg.message.includes("jam") || msg.message.includes("buka") || msg.message.includes("tutup")) {
-          return "layanan"
-      } else if(msg.message.includes("atur") || msg.message.includes("wajib") || msg.message.includes("tas") || msg.message.includes("loker") || msg.message.includes("jaket") || msg.message.includes("makan") || msg.message.includes("minum") || msg.message.includes("presensi")) {
-          return "peraturan_kunjungan"
-      } else if (msg.message.includes("mou") ) {
-        return "mou"
-      } else if (msg.message.includes("struktur") || msg.message.includes("anggota")) {
-          return "struktur"
-      } else if(msg.message.includes("sertifikat") || msg.message.includes("akreditasi")) {
-          return "akreditasi"
-      } else if (dikembalikanOrangLainValid || dikembalikanTemanValid || dikembalikanPihakValid) {
-          return "dikembalikan_pihak_lain"
-      } else if(bebasPinjamD3Valid || bebasPinjamD4Valid || bebasPinjamS2D3Valid || bebasPinjamS2D4Valid) {
-          return "bebas_pinjam"
-      }
-  }
-
-  detectSubTopicKelengkapanBerkas(msg) {
-      // const syaratWisuda = ["syarat", "buka", "tutup"]
-      // const isCdProyekAkhir = ["cd", "dvd", "kaset"] || ["tentu", "cd"] || ["isi", "cd"]
-      // const codeQr = ["qr", "qrcode", "code", "kesah"] ||
-
-      const ketentuanCd = ["tentu", "cd"]
-      const isiCd = ["isi", "cd"]
-
-      let ketentuanCdValid = ketentuanCd.every(element => msg.message.includes(element))
-      let isiCdValid = isiCd.every(element => msg.message.includes(element))
-
-      if(msg.message.includes("syarat") || msg.message.includes("wisuda")) {
-          return "syarat_wisuda"
-      } else if (msg.message.includes("kaset") || msg.message.includes("cd") || msg.message.includes("dvd") || ketentuanCdValid || isiCdValid ) {
-          return "is_cd_proyek_akhir"
-      } else if(msg.message.includes("qr") || msg.message.includes("qrcode") || msg.message.includes("code") || msg.message.includes("kode") || msg.message.includes("kesah") ) {
-          return "qr_code"
-      }
-  }
-
-  detectSubTopicVisiDanMisi(msg) {
-      if(msg.message.includes("visi")) {
-          return "visi"
-      } else if(msg.message.includes('misi')) {
-          return "misi"
-      }
-  }
-
-  detectSubTopicKoleksi(msg) {
-
-      const koleksiJurnal = ["koleksi", "jurnal"]
-      const koleksiEbook = ["koleksi", "ebook"]
-
-      let koleksiJurnalValid = koleksiJurnal.every(el => msg.message.includes(el))
-      let koleksiEbookValid = koleksiEbook.every(el => msg.message.includes(el))
-
-      if(msg.message.includes("jurnal") || koleksiJurnalValid) {
-          return "jurnal"
-      } else if(msg.message.includes('ebook') || koleksiEbookValid) {
-          return "ebook"
-      }
-  }
-
-  handleResponse(response ) {
-    if(this.conversationState === "peminjaman") {
-
-    }
-  }
 
   updateChatText(chatbox) {
     var html = "";

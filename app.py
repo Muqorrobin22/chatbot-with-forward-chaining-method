@@ -519,7 +519,115 @@ def rule_syarat_confirm():
     message = {"answer": resp};
     return jsonify(message)
 
+@app.get("/rule-based/keanggotaan")
+def rule_keanggotaan():
+    resp = """Keanggotaan perpustakaan terbuka bagi sivitas Politeknik Elektronika Negeri Surabaya. Aktivasi keanggotaan dapat dilakukan dengan menunjukkan:\n
+1. Smart Card / Kartu Mahasiswa (KTM) PENS
+2. Kartu Pegawai PENS
+"""
+    message = {"answer": resp};
+    return jsonify(message)
 
+
+@app.get("/rule-based/koleksi_perpus")
+def rule_koleksi_perpus():
+    resp = """Koleksi buku Perpustakaan PENS meliputi buku cetak, modul ajar, ebook, jurnal dan tugas akhir D3, D4, dan Thesis
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/struktur_organisasi")
+def rule_struktur_organisasi():
+    resp = """Struktur Organisasi Perpustakaan PENS dapat dilihat pada link berikut \linkhttps://perpustakaan.pens.ac.id/struktur-keanggotaan/\link
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/koleksi_buku")
+def rule_koleksi_buku():
+    resp = """Anda dapat melihat koleksi buku perpustakaan dengan cara:\n
+
+1. Sambungkan koneksi Anda dengan wifi eepiswlan.
+2. Buka link berikut: \linkhttps://mis.pens.ac.id/\link
+3. Pilih menu Lain-lain dan kemudian pilih Perpustakaan.
+4. Klik logo PENS dan cari buku yang Anda inginkan di kolom pencarian.\n
+
+Dengan langkah-langkah ini, Anda dapat mengakses koleksi buku yang tersedia di perpustakaan.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+
+@app.get("/rule-based/layanan_loker")
+def rule_layanan_loker():
+    resp = """Layanan loker UPT Perpustakaan Politeknik Elektronika Negeri Surabaya yang disediakan bagi para pengguna untuk menyimpan barang – barang seperti tas, jaket, buku, serta berbagai barang bawaan yang layak untuk disimpan di lemari loker.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/layanan_referensi")
+def rule_referensi():
+    resp = """Layanan Koleksi Referensi terdiri dari Kamus, Ensiklopedia, Handbook, Abstraks, Manual Book, dan Laporan Tahunan. Layanan referensi di UPT Perpustakaan Politeknik Elektronika Negeri Surabaya menggunakan open access atau sistem layanan terbuka, dimana setiap pengguna dapat mengambil sendiri koleksi referensi secara langsung dari rak. 
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/koleksi_modul")
+def rule_koleksi_module_ajar():
+    resp = """Data judul koleksi modul ajar sudah tersedia di komputer Online Public Access Catalogue (OPAC) perpustakaan dengan mengakses \linkhttps://mis.eepis-its.edu/\link guna untuk memudahkan pencarian modul ajar dengan cepat dan tepat. Selanjutnya ketua kelas beserta perwakilan teman kelas berkunjung ke Perpustakaan untuk melakukan proses peminjaman modul ajar.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/mencari_buku")
+def rule_mencari_buku():
+    resp = """Berikut langkah-langkah untuk mencari buku di rak:\n
+
+1. Buka: \linkhttps://mis.pens.ac.id\link, kemudian klik Perpustakaan.
+2. Klik logo PENS, kemudian klik Collection dan pilih jenis koleksi.
+3. Ketik kata kunci buku yang dibutuhkan, kemudian catat lokasinya. Misalnya, D4/TAK/3396/2017, yang artinya:\n
+ -D4: Koleksi perpustakaan D4
+ -TAK: Tugas Akhir Jurusan Komputer
+ -3396: Nomor Induk TA
+ -2017: Tahun Wisuda
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/pengadaan_buku")
+def rule_pengadaan_buku():
+    resp = """Berikut cara pengadaan buku perpustakaan PENS:\n
+
+1. Buka \linkhttps://mis.pens.ac.id\link, kemudian klik Unit dan pilih Perpustakaan.
+2. Klik Pemesanan Buku Baru.
+3. Klik Tambah.
+4. Isi detail buku yang ingin dipesan, lalu klik Simpan.
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/tata_tertib")
+def rule_tata_tertib():
+    resp = """Tata tertib perpustakaan PENS dapat dilihat di link berikut : \linkhttps://perpustakaan.pens.ac.id/tentang-kami/\link
+"""
+    message = {"answer": resp};
+    return jsonify(message)
+
+
+@app.get("/rule-based/npp_perpustakaan")
+def rule_npp_perpustakaan():
+    resp = """NPP Perpustakaann PENS : 3578082C0200001
+"""
+    message = {"answer": resp};
+    return jsonify(message)
 
 
 # End of: Changed Version - Rule Based
