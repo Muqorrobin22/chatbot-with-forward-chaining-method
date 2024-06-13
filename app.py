@@ -531,7 +531,7 @@ def rule_keanggotaan():
 
 @app.get("/rule-based/koleksi_perpus")
 def rule_koleksi_perpus():
-    resp = """Koleksi buku Perpustakaan PENS meliputi buku cetak, modul ajar, ebook, jurnal dan tugas akhir D3, D4, dan Thesis
+    resp = """Koleksi buku Perpustakaan PENS meliputi buku cetak, modul ajar, ebook, jurnal dan tugas akhir D3, D4, dan Thesis.  Dapat di akses di link berikut : \linkhttps://mis.pens.ac.id/\link
 """
     message = {"answer": resp};
     return jsonify(message)
